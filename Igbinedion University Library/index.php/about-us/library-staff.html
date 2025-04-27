@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Igbinedion University Library</title>
+    <meta
+      name="keywords"
+      content="Library, Modern, University, Igbinedion University"
+    />
+    <meta
+      name="description"
+      content="Igbinedion University E-Library – A modern digital library experience"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="Website Icon"
+      href="../../images/IUO_logo-removebg-preview.png"
+    />
+
+    <!-- Google Fonts & Material Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <style>
+      /* Reset & Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: #444;
+        /* background: linear-gradient(to top, #334c6694,#334c6690); */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+      }
+      a:hover {
+        color: #fff;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      ul {
+        list-style: none;
+      }
+      /* Container */
+      .container {
+        width: 90%;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        height: 75px;
+        display: flex;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .header-inner {
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo img {
+        max-height: 60px;
+      }
+      /* Navigation */
+      nav {
+        position: relative;
+      }
+      nav ul {
+        display: flex;
+        gap: 20px;
+      }
+      nav ul li {
+        position: relative;
+      }
+      nav ul li a {
+        padding: 10px 15px;
+        /* font-weight: 600; */
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition: 0.3s all;
+      }
+
+      nav ul li a::before {
+        content: "";
+        position: absolute;
+        /* top: 0; */
+        bottom: 1.5px;
+        left: 50%;
+        width: 0%;
+        height: 0.2rem;
+        background: #e8e8e8;
+        border-radius: 25px;
+        transition: 300ms all;
+      }
+
+      nav ul li a:hover::before {
+        content: "";
+        left: 0%;
+        width: 100%;
+      }
+      nav ul li a:hover,
+      nav ul li.active > a {
+        /* background: #0274ffe6;/ */
+        color: #333;
+      }
+      /* Dropdown Menu with Smooth Transition (Desktop) */
+      nav ul li ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        padding: 10px 0;
+        border-radius: 4px;
+        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+      }
+      nav ul li:hover > ul {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      nav ul li ul li a {
+        padding: 8px 15px;
+        display: block;
+        color: #000;
+        transition: 0.3s all;
+      }
+      nav ul li ul li a:hover {
+        background: #063f8529;
+        /* color: #fff; */
+      }
+
+      /* Mobile Navigation Toggle */
+      .mobile-nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      /* section */
+
+      /* Section Styles */
+      section {
+        /* padding: 3.5rem 2.5rem; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* width: 100%; */
+        gap: 5%;
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        margin: 3rem auto;
+        max-width: 1280px;
+        width: 90%;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(70, 109, 155, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      section:hover {
+        transform: translateY(-5px);
+      }
+
+      /* section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #466d9b, #6891c0);
+      } */
+
+      section h2 {
+        color: #466d9b;
+        font-size: 1, 5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 0.75rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+      }
+
+      section h2::after {
+        content: "";
+        position: absolute;
+        bottom: 9px;
+        left: 0;
+        width: 15%;
+        height: 3px;
+        background: linear-gradient(90deg, #466d9b, transparent);
+        border-radius: 2px;
+      }
+
+      section p {
+        color: #2c3e50;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 1.8rem;
+        text-align: justify;
+        transition: all 0.3s ease;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      section p:hover {
+        background: rgba(70, 109, 155, 0.03);
+        transform: translateX(5px);
+      }
+
+      section ul {
+        margin: 2rem 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      section ol {
+        background: rgba(70, 109, 155, 0.05);
+        padding: 1.2rem 1.5rem;
+        border-radius: 12px;
+        margin: 0.5rem;
+        color: #466d9b;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(70, 109, 155, 0.1);
+        /* cursor: pointer; */
+      }
+
+      section ol:hover {
+        background: rgba(70, 109, 155, 0.1);
+        transform: translateX(10px);
+        box-shadow: 0 4px 15px rgba(70, 109, 155, 0.1);
+      }
+
+      /* Additional Spacing Utilities */
+      .mt-2 {
+        margin-top: 2rem;
+      }
+
+      .mb-2 {
+        margin-bottom: 2rem;
+      }
+
+      .py-2 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(145deg, #466d9b, #2c3e50);
+        color: #fff;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+
+      footer .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      footer .footer-nav ul li a {
+        color: #fff;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+
+      footer .footer-nav ul li a:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      footer > .container > p {
+        font-size: 0.8rem;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 10px;
+        }
+        /* Hide desktop nav; show toggle button */
+        nav {
+          display: none;
+          width: 100%;
+        }
+        nav.active {
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 1rem;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+        /* Display the mobile nav toggle */
+        .mobile-nav-toggle {
+          display: block;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          color: #002349;
+        }
+        /* Override dropdown styles for mobile */
+        nav ul li ul {
+          display: none; /* Hidden by default */
+          position: static; /* Remove absolute positioning */
+          background: none;
+          box-shadow: none;
+          padding: 0;
+          margin-left: 20px; /* Indent submenu items */
+          opacity: 1; /* Ensure it’s visible when toggled */
+          transform: none;
+        }
+        nav ul li.open > ul {
+          display: block;
+        }
+        /* Override hover behavior on mobile so that hover does not trigger dropdowns */
+        nav ul li:hover > ul {
+          display: none !important;
+        }
+        footer .footer-nav ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        nav ul li a::before {
+          content: "";
+          position: absolute;
+          /* top: 0; */
+          bottom: 1.5px;
+          left: 50%;
+          width: 0%;
+          height: 0.2rem;
+          background: #aaaaaa00;
+          border-radius: 25px;
+          transition: 300ms all;
+        }
+
+        footer > .container .footer-nav > ul {
+          display: none;
+          /* display: flex; */
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+
+        /* Section */
+
+        section {
+          padding: 2rem 1.5rem;
+          margin: 1.5rem auto;
+        }
+
+        section h2 {
+          font-size: 2rem;
+        }
+
+        section p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+          margin-bottom: 1rem;
+        }
+
+        section ul {
+          grid-template-columns: 1fr;
+        }
+
+        section ol {
+          padding: 1rem;
+          margin: 0.3rem 0;
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <!-- jQuery (required for slideshow plugins) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Slideshow Plugin (e.g., SlidesJS or a similar lightweight slider) -->
+    <script src="path/to/your/slideshow-plugin.min.js"></script>
+  </head>
+  <body>
+<!-- Header Section -->
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <a href="../../index.html" title="Igbinedion University E-Library Home">
+        <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
+      </a>
+    </div>
+    <!-- Mobile Nav Toggle Button -->
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+      <span class="material-icons">menu</span>
+    </button>
+    <nav>
+      <ul>
+        <li class="active"><a href="../../index.html">Home</a></li>
+        <li>
+          <a href="#">About</a>
+          <ul>
+            <li>
+              <a href="../about-us/library-staff.html"
+                >About the Library</a
+              >
+            </li>
+            <li>
+              <a href="../about-us/librarian.html">Librarian</a>
+            </li>
+            <li>
+              <a href="../about-us/library-staff.html"
+                >Library Staff</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Find Information</a>
+          <ul>
+            <li>
+              <a href="../databases.html"
+                >Databases</a
+              >
+            </li>
+            <li>
+              <a href="../find-information/ebooks.html">E-Books</a>
+            </li>
+            <li>
+              <a href="../find-information/e-journals.html"
+                >E-Journals</a
+              >
+            </li>
+            <li>
+              <a
+                href="../find-information/reference-resources.html"
+                >Reference</a
+              >
+            </li>
+            <li>
+              <a href="../find-information/open-courseware.html"
+                >Open Courseware</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Our Services</a>
+          <ul>
+            <li>
+              <a href="../ours-services/ask-a-librarian.html"
+                >Ask a Librarian</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="../news-and-events.html">News</a>
+          <ul>
+            <li>
+              <a href="../news-and-events/new-arrivals.html"
+                >New Arrivals</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+        <li><a href="https://ourdatabase.com.ng/iuoelib/" target="_blank">OJLIS</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+    <section class="fade-in">
+      <h2>Library Staffs</h2>
+
+      <table
+        style="border: 1px #aba8a8 solid; padding: 20px; border-radius: 10px"
+      >
+        <tbody>
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img
+                src="../../images/images/Prof Adulsalami pic 3 clr.jpg"
+                alt=""
+              />
+              Prof. Abdulsalami L.T
+              <br />(PhD, MLIS, CLN, LLB, MLC,MLC, MIAD,BLIS,) <br />University
+              Librarian
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img src="../../images/images/Mr Obando.jpg" alt="" />
+              <br />
+              Bonnie Obeka Obande
+              <br />(PhD in view, MLIS, BLIS, NCE. CLN) <br />Librarian I
+              (Reader Ser)
+            </td>
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img
+                width="300px"
+                src="../../images/images/Mr Vincent.jpg"
+                alt=""
+              />
+              Ekhaguosa, Vincent O
+              <br />(PhD in view, MLIS, BLIS, NCE. CLN) <br />Librarian II
+              (E-Librarian)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img src="../../images/images/Mr Efosa.jpg" alt="" />
+              Efosa Egharevba
+              <br />(PhD in view, MLIS, BLIS, CLN) <br />Librarian II
+              (Librarian)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img width="350px" src="../../images/images/Mr Musa.jpg" alt="" />
+              Bilal Musa Ado
+              <br />(BLIS, CLN) <br />Graduate Assistant (Art & Social Sci)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img src="../../images/images/Miss Grace.jpg" alt="" />
+              Unamba Grace Amarachi
+              <br />(BLIS) <br />Graduate Librarian (Medical)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img
+                width="350px"
+                src="../../images/images/Mr Adeyemi.jpg"
+                alt=""
+              />
+              Adeyemi Jone
+              <br />(DLIS) <br />Senior Lib Officer I (Binding)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td
+              style="
+                display: flex;
+                border: 1px #000000 solid;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <img
+                width="200px"
+                src="../../images/images/Mr Lucky.jpg"
+                alt=""
+              />
+              Nwaiwu Lucky
+              <br />(DLIS) <br />Library Officer (Porter)
+            </td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Afolabi Ruth</td>
+            <td>(HND)</td>
+            <td>Higher Libr. Officer (Law)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Omotosho Isaac</td>
+            <td>(DLIS)</td>
+            <td>Prin. Lib Officer II (Cat & Class)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Ojabe Monday</td>
+            <td>(DLIS)</td>
+            <td>Senior Lib Assistant(Sen Porter Law)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Ayande Favour A.Ayeneyin</td>
+            <td>(SSCE)</td>
+            <td>Senior Lib Assistant(Sen Porter Law)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Amune Mary</td>
+            <td>(SSCE)</td>
+            <td>Senior Library Assistant</td>
+          </tr>
+
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+          <tr>
+            <td>Ojaide Florence</td>
+            <td>(SSCE)</td>
+            <td>Chief Lib Assistant (NAS/APPLIED)</td>
+          </tr>
+
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Osamudiamen Paul</td>
+            <td>(SSCE)</td>
+            <td>Lib Officer (Pharmacy Lib)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Osarodion Eboigbodin</td>
+            <td>(SSCE)</td>
+            <td>Library Assistant (Bindery)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Ogunusi Iwolola</td>
+            <td>(SSCE)</td>
+            <td>Library Assistant ( Alumina Lib)</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Nkwuka Ekwemalor Theresa</td>
+            <td>(SSCE)</td>
+            <td>Assistant Chief Typist I</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Mabel Joseph</td>
+            <td>(SSCE)</td>
+            <td>Care-taker Cleaner</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Mercy Samson</td>
+            <td>(SSCE)</td>
+            <td>Care-taker Cleaner</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Agbonghae Osasere</td>
+            <td>(SSCE)</td>
+            <td>Cleaner</td>
+          </tr>
+          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <tr>
+            <td>Micheal Osahenrumwen</td>
+            <td>(SSCE)</td>
+            <td>Librarian Driver</td>
+          </tr>
+        </tbody>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+      </table>
+    </section>
+
+    <!-- Footer Section -->
+
+    <footer class="fade-in">
+      <div class="container">
+        <div class="footer-nav">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./find-information.html">Find Information</a></li>
+            <li><a href="./services.html">Our Services</a></li>
+            <li><a href="./news-events.html">News</a></li>
+            <li><a href="./contact.html">Contact Us</a></li>
+            <li><a href="#" target="_blank">OJLIS</a></li>
+          </ul>
+        </div>
+        <p>&copy; 2025 Igbinedion University E-Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Initialization Scripts -->
+    <script>
+      $(document).ready(function () {
+        // Mobile Navigation Toggle
+        $(".mobile-nav-toggle").click(function () {
+          $("nav").toggleClass("active");
+        });
+
+        // Mobile Dropdown Toggle:
+        // When a link with a submenu is clicked on mobile, prevent its default action
+        // and toggle the dropdown menu.
+        $("nav ul li:has(ul) > a").click(function (e) {
+          if ($(window).width() < 768) {
+            e.preventDefault();
+            $(this).parent().toggleClass("open");
+            $(this).siblings("ul").slideToggle();
+          }
+        });
+
+        // Basic Slideshow Functionality
+        let currentIndex = 0;
+        const slides = $(".slides .slide");
+        const slideCount = slides.length;
+
+        function showSlide(index) {
+          const offset = -index * 100 + "%";
+          $(".slides").css("transform", "translateX(" + offset + ")");
+        }
+
+        $(".next").click(function (e) {
+          e.preventDefault();
+          currentIndex = (currentIndex + 1) % slideCount;
+          showSlide(currentIndex);
+        });
+
+        $(".prev").click(function (e) {
+          e.preventDefault();
+          currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+          showSlide(currentIndex);
+        });
+
+        // Auto-play the slideshow every 4 seconds
+        setInterval(function () {
+          currentIndex = (currentIndex + 1) % slideCount;
+          showSlide(currentIndex);
+        }, 4000);
+      });
+    </script>
+  </body>
+</html>
