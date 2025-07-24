@@ -264,6 +264,329 @@
         font-size: 0.8rem;
       }
 
+      .library-hero-slide {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        height: 500px;
+        max-height: 90vh;
+      }
+
+      .library-hero-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.75);
+        border-radius: 12px;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom right,
+          rgba(0, 26, 61, 0.6),
+          rgba(0, 26, 61, 0.2)
+        );
+        z-index: 1;
+      }
+
+      .hero-caption {
+        position: absolute;
+        z-index: 2;
+        color: white;
+        animation: fadeInUp 1.2s ease-in-out;
+        text-align: center;
+        padding: 0 20px;
+        width: 100%;
+      }
+
+      .hero-caption.centered {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .hero-caption h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-variant: small-caps;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-caption p {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #cfe8ff;
+        margin-top: 10px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -40%);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-caption h1 {
+          font-size: 2rem;
+        }
+
+        .hero-caption p {
+          font-size: 1rem;
+        }
+      }
+
+      .campus-slide {
+        position: relative;
+        height: 500px;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      .campus-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+        border-radius: 12px;
+      }
+
+      .campus-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom right,
+          rgba(0, 26, 61, 0.6),
+          rgba(0, 26, 61, 0.2)
+        );
+        z-index: 1;
+      }
+
+      .campus-caption {
+        position: absolute;
+        z-index: 2;
+        text-align: center;
+        padding: 20px 30px;
+        color: #fff;
+        background-color: rgba(0, 34, 68, 0.5); /* smooth dark-blue tint */
+        border-radius: 10px;
+        backdrop-filter: blur(4px); /* adds subtle modern glassy effect */
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        animation: slideInFade 1.2s ease-in-out;
+      }
+
+      .campus-caption.centered {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .campus-caption h1 {
+        font-variant: small-caps;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .campus-caption p {
+        font-variant: small-caps;
+        font-size: 1.2rem;
+        margin-top: 10px; 
+        margin-bottom: 25px; 
+        color: #d1ecff;
+      }
+
+      .sparkle {
+        animation: twinkle 1.2s ease-in-out infinite alternate;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .campus-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #002244;
+        color: #fff;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .campus-btn:hover {
+        background-color: #004080;
+        transform: scale(1.05);
+      }
+
+      @keyframes slideInFade {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .campus-caption h1 {
+          font-size: 2rem;
+        }
+
+        .campus-caption p {
+          font-size: 1rem;
+        }
+      }
+
+      .slide.library-main-slide {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .slide.library-main-slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        filter: brightness(1.05) contrast(1.05); /* subtle highlight */
+        transition: transform 0.4s ease;
+      }
+
+      .slide.library-main-slide:hover img {
+        transform: scale(1.01);
+      }
+
+      .vc-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 2rem;
+        gap: 4rem;
+        height: 70vh;
+        background: #fff;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+
+      .vc-image img {
+        max-width: 350px;
+        width: 100%;
+        height: auto;
+        border-radius: 25px;
+        object-fit: cover;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .vc-image img:hover {
+        transform: scale(1.03);
+      }
+
+      .vc-caption {
+        max-width: 500px;
+        text-align: left;
+        padding: 1rem;
+      }
+
+      .vc-caption h4 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 0.25rem;
+      }
+
+      .vc-caption p {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #466d9b;
+      }
+
+      .location-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        height: 75vh;
+        padding: 2rem;
+        background: #fff;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+      }
+
+      .location-image {
+        flex: 1 1 60%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .location-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .location-image img:hover {
+        transform: scale(1.02);
+      }
+
+      .location-caption {
+        flex: 1 1 35%;
+        max-width: 450px;
+        text-align: left;
+      }
+
+      .location-caption h4 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+      }
+
+      .location-caption p {
+        font-size: 1rem;
+        color: #466d9b;
+        line-height: 1.6;
+      }
+
+      /* Responsive Fix */
+      @media (max-width: 768px) {
+        .location-slide {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .location-caption {
+          text-align: center;
+          margin-top: 1rem;
+        }
+
+        .location-caption h4 {
+          font-size: 1.4rem;
+        }
+      }
+
       /* Responsive Styles */
       @media (max-width: 768px) {
         .header-inner {
@@ -466,89 +789,173 @@
     <section class="slideshow container fade-in">
       <div class="slides">
         <!-- Each .slide can be dynamically generated -->
-        <div class="slide" style="padding-top: 20px">
+
+        <div class="slide library-hero-slide">
+          <div class="hero-overlay"></div>
           <img
             src="https://iuokada.edu.ng/wp-content/uploads/2023/05/20210311_164505-01-scaled-800x600.jpeg"
             alt="E-Library"
           />
+          <div class="hero-caption centered">
+            <h1 style="width: 100%">IGBINEDION UNIVERSITY E-LIBRARY</h1>
+            <p>A Gateway to Knowledge, Research & Innovation</p>
+          </div>
         </div>
-        <div class="slide">
+
+        <div class="slide campus-slide">
+          <div class="campus-overlay"></div>
           <img
-            style="background-size: cover"
             src="https://edupadiblogpublic.s3.eu-central-1.amazonaws.com/Igbinedion-University-1024x420.jpg"
-            alt="Igbinedion University Image"
+            alt="Igbinedion University Main Campus Gate"
           />
-        </div>
-        <div
-          class="slide"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-          "
-        >
-          <img
-            src="images/images/Vice chancellor 3 img.jpg"
-            alt="Picture of the Vice Chancellor"
-            style="transform: scale(1.5); margin-top: 250px; max-height: 100%; max-width: 100%; object-fit: contain"
-          />
-        </div>
-        <div
-          class="slide"
-          style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-            background-color: #fff;
-          "
-        >
-          <img
-            src="images/images/Vice chancellor 4 img.jpg"
-            alt="Picture of the Vice Chancellor"
-            style="transform: scale(1.5); margin-top: 250px; max-height: 100%; max-width: 100%; object-fit: contain"
-          />
+          <div class="campus-caption centered">
+            <h1>Where the Magic Happens <span class="sparkle">✨</span></h1>
+            <p>Shaping Minds, Building the Future</p>
+            <a href="#about-campus" class="campus-btn">Explore the Campus</a>
+          </div>
         </div>
 
-        <div class="slide" style="height: fit-content">
-          <img
-            style="background-size: contain; width: 100%; padding-bottom: 130px"
-            src="./images/images/Prof Adulsalami pic5 facial.jpg"
-            alt="Library Slider"
-            style="width: 100%"
-          />
-        </div>
-        <div class="slide">
-          <img
-            style="box-shadow: inset 0px 0px 100px black"
-            src="./images/images/Circulation Hall 1a.jpg"
-            alt="Library Slider"
-          />
-        </div>
-        <div class="slide">
-          <img src="./images/images/Engineering Libr.jpg" alt="Reading Room" />
-        </div>
-        <div class="slide">
-          <img src="./images/images/NAS Libr.jpg" alt="Reading Room" />
-        </div>
-        <div class="slide">
-          <img
-            src="./images/images/Elibrary Landscape1.jpg"
-            alt="Reading Room"
-          />
+        <div class="slide vc-slide" style="margin-top: 50px">
+          <div class="vc-image">
+            <img
+              style="transform: scale(1.8); height: 200px"
+              src="images/images/Vice chancellor 3 img.jpg"
+              alt="Picture of the Vice Chancellor"
+            />
+          </div>
+          <div class="vc-caption" style="margin-left: 120px">
+            <h4>Prof. Lawrence Ikechukwu Ezemonye</h4>
+            <p>Vice Chancellor</p>
+          </div>
         </div>
 
-        <div class="slide">
-          <img
-            src="./images/images/Exhibition Hall pic 1.jpg"
-            alt="Reading Room"
-          />
+        <div class="slide vc-slide" style="margin-top: 40px">
+          <div class="vc-image">
+            <img
+              style="transform: scale(1.4); height: 200px"
+              src="images/images/Vice chancellor 4 img.jpg"
+              alt="Picture of the Vice Chancellor"
+            />
+          </div>
+          <div class="vc-caption" style="margin-left: 120px">
+            <h4>Prof. Lawrence Ikechukwu Ezemonye</h4>
+            <p>Vice Chancellor</p>
+          </div>
         </div>
-        <div class="slide" style="padding-top: 20px">
-          <img src="./images/images/Binding Dept pic 2.jpg" />
+
+        <div class="slide vc-slide" style="margin-top: 60px">
+          <div class="vc-image">
+            <img
+              style="transform: scale(1.2)"
+              src="./images/images/Prof Adulsalami pic5 facial.jpg"
+              alt="Prof. Abdulsalami L.T"
+            />
+          </div>
+          <div class="vc-caption">
+            <h4>Prof. Abdulsalami L.T</h4>
+            <p>University Librarian</p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img
+              src="./images/images/Circulation Hall 1a.jpg"
+              alt="Library Circulation Hall"
+            />
+          </div>
+          <div class="location-caption">
+            <h4>Circulation Hall</h4>
+            <p>
+              The heart of the Igbinedion University Library system where
+              students access, interact, and discover resources daily.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img
+              src="./images/images/Engineering Libr.jpg"
+              alt="Engineering Library"
+            />
+          </div>
+          <div class="location-caption">
+            <h4>Engineering Library</h4>
+            <p>
+              This dedicated study and reference zone is tailored for
+              engineering students, providing technical texts, resources, and a
+              quiet reading space.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img src="./images/images/NAS Libr.jpg" alt="NAS Library" />
+          </div>
+          <div class="location-caption">
+            <h4>NAS Library</h4>
+            <p>
+              The NAS Library (Natural and Applied Sciences) provides students
+              and researchers access to a vast collection of science-focused
+              resources and journals, all in a calm, well-lit study environment.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img
+              src="./images/images/Elibrary Landscape1.jpg"
+              alt="E-Library Computer Section"
+            />
+          </div>
+          <div class="location-caption">
+            <h4>E-Library Computer Section</h4>
+            <p>
+              The digital access zone for students to explore online journals,
+              databases, research materials, and e-learning platforms. Equipped
+              with modern computers and high-speed internet.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img
+              src="./images/images/Exhibition Hall pic 1.jpg"
+              alt="Exhibition Hall"
+            />
+          </div>
+          <div class="location-caption">
+            <h4>Exhibition Hall</h4>
+            <p>
+              This vibrant exhibition space showcases academic achievements,
+              university milestones, and student activities. A place where
+              knowledge, creativity, and tradition meet in one gallery.
+            </p>
+          </div>
+        </div>
+
+        <div class="slide location-slide">
+          <div class="location-image">
+            <img
+              src="./images/images/Binding Dept pic 2.jpg"
+              alt="Binding Department"
+            />
+          </div>
+          <div class="location-caption">
+            <h4>Binding Department</h4>
+            <p>
+              The Binding Department handles the finishing touches for academic
+              documents and archival records. Precision tools and skilled
+              technicians ensure long-term durability of important materials.
+            </p>
+          </div>
         </div>
       </div>
+
       <div class="slideshow-nav">
         <a href="#" class="prev">&#10094;</a>
         <a href="#" class="next">&#10095;</a>
