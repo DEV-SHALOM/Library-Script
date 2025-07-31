@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programmes and E-Books</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="Website Icon"
+      href="../../images/IUO_logo-removebg-preview.png"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: #444;
+        /* background: linear-gradient(to top, #334c6694,#334c6690); */
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+      }
+      a:hover {
+        color: #fff;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      ul {
+        list-style: none;
+      }
+      /* Container */
+      .container {
+        width: 90%;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        background: rgb(255, 255, 255);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        height: 75px;
+        display: flex;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .header-inner {
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .page-title {
+        color: #466d9b;
+        font-size: 1.9rem;
+        margin-bottom: 1rem;
+        margin-top: 1.7rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 0.75rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .page-title::after {
+        content: "";
+        position: absolute;
+        text-align: center;
+        bottom: 9px;
+        left: 43%;
+        width: 15%;
+        height: 3px;
+        background: linear-gradient(90deg, #466d9b, transparent);
+        border-radius: 2px;
+      }
+      .logo img {
+        max-height: 60px;
+      }
+      /* Navigation */
+      nav {
+        position: relative;
+      }
+      nav ul {
+        display: flex;
+        gap: 20px;
+      }
+      nav ul li {
+        position: relative;
+      }
+      nav ul li a {
+        padding: 10px 15px;
+        /* font-weight: 600; */
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition: 0.3s all;
+      }
+
+      nav ul li a::before {
+        content: "";
+        position: absolute;
+        /* top: 0; */
+        bottom: 1.5px;
+        left: 50%;
+        width: 0%;
+        height: 0.2rem;
+        background: #e8e8e8;
+        border-radius: 25px;
+        transition: 300ms all;
+      }
+
+      nav ul li a:hover::before {
+        content: "";
+        left: 0%;
+        width: 100%;
+      }
+      nav ul li a:hover,
+      nav ul li.active > a {
+        /* background: #0274ffe6;/ */
+        color: #333;
+      }
+      /* Dropdown Menu with Smooth Transition (Desktop) */
+      nav ul li ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        padding: 10px 0;
+        border-radius: 4px;
+        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
+        min-width: 180px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1000;
+      }
+      nav ul li:hover > ul {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      nav ul li ul li a {
+        padding: 8px 15px;
+        display: block;
+        color: #000;
+        transition: 0.3s all;
+      }
+      nav ul li ul li a:hover {
+        background: #063f8529;
+        /* color: #fff; */
+      }
+
+      .mobile-nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .card-img-top {
+        height: 200px;
+        object-fit: contain;
+        padding: 20px;
+        background-color: #fff;
+      }
+
+      .resource-card {
+        transition: transform 0.2s;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .resource-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-img-top {
+        height: 200px;
+        object-fit: contain;
+        padding: 20px;
+        background-color: #fff;
+      }
+
+      .footer {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 2rem;
+        margin-top: 3rem;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        .header-inner {
+          flex-direction: column;
+          gap: 10px;
+        }
+        /* Hide desktop nav; show toggle button */
+        nav {
+          display: none;
+          width: 100%;
+        }
+        nav.active {
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 1rem;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+        /* Display the mobile nav toggle */
+        .mobile-nav-toggle {
+          display: block;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          color: #002349;
+        }
+        /* Override dropdown styles for mobile */
+        nav ul li ul {
+          display: none; /* Hidden by default */
+          position: static; /* Remove absolute positioning */
+          background: none;
+          box-shadow: none;
+          padding: 0;
+          margin-left: 20px; /* Indent submenu items */
+          opacity: 1; /* Ensure it’s visible when toggled */
+          transform: none;
+        }
+        nav ul li.open > ul {
+          display: block;
+        }
+        /* Override hover behavior on mobile so that hover does not trigger dropdowns */
+        nav ul li:hover > ul {
+          display: none !important;
+        }
+        footer .footer-nav ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        nav ul li a::before {
+          content: "";
+          position: absolute;
+          /* top: 0; */
+          bottom: 1.5px;
+          left: 50%;
+          width: 0%;
+          height: 0.2rem;
+          background: #aaaaaa00;
+          border-radius: 25px;
+          transition: 300ms all;
+        }
+
+        footer > .container .footer-nav > ul {
+          display: none;
+          /* display: flex; */
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(145deg, #466d9b, #2c3e50);
+        color: #fff;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+
+      footer .footer-nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      footer .footer-nav ul li a {
+        color: #fff;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+
+      footer .footer-nav ul li a:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+
+      footer > .container > p {
+        font-size: 0.8rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <!-- Header Section -->
+       <header>
+      <div class="container header-inner">
+        <div class="logo">
+          <a href="index.html" title="Igbinedion University E-Library Home">
+            <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
+          </a>
+        </div>
+        <!-- Mobile Nav Toggle Button -->
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+          <span class="material-icons">menu</span>
+        </button>
+        <nav>
+          <ul>
+            <li class="active"><a href="../../index.html">Home</a></li>
+            <li>
+              <a href="#">About</a>
+              <ul>
+                <li>
+                  <a href="../about-us.html">About the Library</a>
+                </li>
+                <li>
+                  <a href="../about-us/librarian.html">Librarian</a>
+                </li>
+                <li>
+                  <a href="../about-us/library-staff.html"
+                    >Library Staff</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">E-Library Resources</a>
+              <ul>
+                <li>
+                  <a href="https://ourdatabase.com.ng/iuoelib/" target="_blank"
+                    >Subscribed Databases</a
+                  >
+                </li>
+                <li>
+                  <a href="../databases.html">Databases</a>
+                </li>
+                <li>
+                  <a href="../find-information/ebooks.html">E-Books</a>
+                </li>
+                <li>
+                  <a href="../find-information/e-journals.html"
+                    >E-Journals</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="../find-information/reference-resources.html"
+                    >Reference</a
+                  >
+                </li>
+                <li>
+                  <a href="../find-information/open-courseware.html"
+                    >Open Courseware</a
+                  >
+                </li>
+                <li>
+                  <a href="./programmes.html"
+                    >Programmes and E-Books</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Our Services</a>
+              <ul>
+                <li>
+                  <a href="../ours-services/ask-a-librarian.html"
+                    >Ask a Librarian</a
+                  >
+                </li>
+              </ul>
+            </li>
+  
+            <li>
+              <a href="../ours-services/ask-a-librarian.html"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="https://acadrespub.com/" target="_blank"
+                >Journal Publication</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container my-5">
+      <h1 class="text-center mb-5 display-4 page-title">
+        Programmes and E-Books
+      </h1>
+
+      <div class="container my-5">
+        <div class="row g-4">
+          <!-- Civil Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Civil Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Gain access to a wealth of free, high‑quality educational
+                  resources covering core areas of civil engineering, from
+                  structural analysis and geotechnics to transportation systems
+                  and environmental engineering.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=civil+engineering&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Electrical & Electronic Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Electrical & Electronic Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Explore free resources on circuit theory, power systems,
+                  electronics, and control engineering to advance your technical
+                  knowledge.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=electrical+and+electronic+engineering&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mechanical Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Mechanical Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Access resources on thermodynamics, fluid mechanics,
+                  manufacturing, and mechanical design to enhance your
+                  engineering skills.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=mechanical+engineering&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mechatronic Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Mechatronic Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Learn the integration of mechanical, electrical, and computer
+                  systems to design smart automated technologies.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=mechatronic+engineering&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Computer Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Computer Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Access free resources on hardware design, embedded systems,
+                  networking, and digital logic.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=computer+engineering&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nursing Sciences -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Nursing Sciences
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Learn patient care, medical ethics, pharmacology, and clinical
+                  skills from leading open resources.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=nursing+science&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physiotherapy -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Physiotherapy
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Study human anatomy, rehabilitation methods, and exercise
+                  therapy to restore patient mobility.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=physiotherapy&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mass Communication -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Mass Communication
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Explore journalism, public relations, and broadcasting to
+                  excel in the media industry.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Mass+Communication&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- International Relations -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  International Relations
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Study diplomacy, global politics, and international law to
+                  navigate world affairs.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=International+Relations&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Computer Science -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Computer Science
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Learn algorithms, AI, and programming fundamentals with top
+                  open-access resources.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Computer+Science&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cyber Security -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Cyber Security
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Learn how to protect digital systems with knowledge in network
+                  security, ethical hacking, cryptography, and cyber threat
+                  prevention.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Cyber+Security&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Information Technology -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Information Technology
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Explore IT fundamentals including system administration,
+                  databases, networking, and cloud computing for modern business
+                  solutions.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Information+Technology&submit="
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Engineering -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Software Engineering
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Master the principles of software design, testing, deployment,
+                  and maintenance to build robust, scalable software
+                  applications.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Software+engineering&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accounting -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Accounting
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Access free accounting resources covering financial reporting,
+                  auditing, taxation, and management accounting for business
+                  success.
+                </p>
+                <a
+                  href=" https://directory.doabooks.org/discover?query=Accounting+&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pharmacy -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Pharmacy
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Learn about drug formulation, pharmacology, toxicology, and
+                  pharmaceutical care from top open-access educational
+                  resources.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Pharmacy&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Law -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Law
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Access legal education resources covering constitutional law,
+                  criminal law, human rights, and international law to deepen
+                  your legal knowledge.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Law&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Economics -->
+          <div class="col-md-6">
+            <div
+              class="card resource-card h-100 shadow-sm border-0"
+              style="border-radius: 14px; overflow: hidden"
+            >
+              <div class="card-body" style="padding: 2rem">
+                <h5
+                  class="card-title fw-bold mb-3"
+                  style="font-size: 1.4rem; color: #2c3e50"
+                >
+                  Economics
+                </h5>
+                <p
+                  class="card-text mb-4"
+                  style="line-height: 1.6; font-size: 0.95rem; color: #555"
+                >
+                  Study microeconomics, macroeconomics, econometrics, and
+                  development economics with world-class open access materials.
+                </p>
+                <a
+                  href="https://directory.doabooks.org/discover?query=Economics&locale-attribute=en"
+                  target="_blank"
+                  class="btn btn-primary px-4 py-2"
+                  style="
+                    border-radius: 10px;
+                    font-weight: 500;
+                    background: linear-gradient(135deg, #007bff, #0056b3);
+                    border: none;
+                  "
+                >
+                  Access Programme
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fade-in">
+      <div class="container">
+        <div class="footer-nav">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="#">E-Library Resources</a></li>
+            <li><a href="services.html">Our Services</a></li>
+            
+            <li><a href="contact.html">Contact Us</a></li>
+            <li>
+              <a href="https://acadrespub.com/" target="_blank"
+                >Journal Publication</a
+              >
+            </li>
+          </ul>
+        </div>
+        <p>&copy; 2025 Igbinedion University E-Library. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
