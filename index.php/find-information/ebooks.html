@@ -4,364 +4,159 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>e-Books - IUOL Library</title>
-    <link
-      rel="Website Icon"
-      href="../../images/IUO_logo-removebg-preview.png"
-    />
+    <link rel="Website Icon" href="../../images/IUO_logo-removebg-preview.png" />
     <style>
-      :root {
-        --primary-color: #2a4365;
-        --accent-color: #5500ff;
+      :root{
+        --primary-color:#2a4365;
+        --accent-color:#5500ff;
+        --ink:#1f2937;
+        --muted:#6b7280;
+        --ring:#dbeafe;
+        --card:#ffffff;
+        --card-border:#e5e7eb;
+        --soft:#f8fafc;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{
+        font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+        line-height:1.6;color:#444;
+        background:linear-gradient(180deg,#f7fbff 0%,#ffffff 100%);
       }
+      a{text-decoration:none;color:inherit;transition:color .2s ease}
+      a:hover{color:#111}
+      img{max-width:100%;display:block}
+      ul{list-style:none}
 
-      body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
-        color: #444;
-        /* background: linear-gradient(to top, #334c6694,#334c6690); */
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
-      }
-      a:hover {
-        color: #fff;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      ul {
-        list-style: none;
-      }
       /* Container */
-      .container {
-        width: 90%;
-        max-width: 1280px;
-        margin: 0 auto;
+      .container{width:90%;max-width:1280px;margin:0 auto}
+
+      /* ====== HEADER (left untouched) ====== */
+      header{background:#fff;backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.05);position:sticky;height:75px;display:flex;top:0;z-index:1000;transition:all .3s ease}
+      .header-inner{padding:1rem 0;display:flex;justify-content:space-between;align-items:center}
+      .logo img{max-height:40px}
+      nav{position:relative}
+      nav ul{display:flex}
+      nav ul li{position:relative}
+      nav ul li a{padding:10px 15px;font-size:.9rem;border-radius:4px;transition:.3s all;position:relative}
+      nav ul li a::before{content:"";position:absolute;bottom:1.5px;left:50%;width:0;height:.2rem;background:#e8e8e8;border-radius:25px;transition:300ms all}
+      nav ul li a:hover::before{left:0;width:100%}
+      nav ul li a:hover,nav ul li.active>a{color:#333}
+      nav ul li ul{display:flex;flex-direction:column;position:absolute;top:100%;left:0;background:#fff;padding:10px 0;border-radius:4px;box-shadow:0 0 100px rgba(0,0,0,.2);min-width:180px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease;z-index:1000}
+      nav ul li:hover>ul{opacity:1;visibility:visible;transform:translateY(0)}
+      nav ul li ul li a{padding:8px 15px;display:block;color:#000;transition:.3s all}
+      nav ul li ul li a:hover{background:#063f8529}
+      .mobile-nav-toggle{display:none;background:none;border:none;font-size:2rem;cursor:pointer}
+
+      /* ====== FOOTER (left mostly as-is) ====== */
+      footer{background:linear-gradient(145deg,#466d9b,#2c3e50);color:#fff;padding:2rem 0;margin-top:4rem}
+      footer .footer-nav ul{display:flex;justify-content:center;gap:2rem;font-size:.75rem;margin-bottom:2rem}
+      footer .footer-nav ul li a{color:#fff;opacity:.8;transition:all .3s ease}
+      footer .footer-nav ul li a:hover{opacity:1;transform:translateY(-2px)}
+      footer>.container>p{font-size:.8rem}
+
+      /* ====== MAIN BODY REDESIGN ONLY ====== */
+      .main-container{padding:2rem 0 4rem}
+      .page-title{
+        color:#466d9b;font-size:1.5rem;margin:1.7rem 0 .5rem;
+        text-align:center;position:relative;padding-bottom:.75rem;font-weight:700;letter-spacing:-.2px
+      }
+      .page-title::after{
+        content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+        width:180px;max-width:40vw;height:3px;background:linear-gradient(90deg,#466d9b,transparent);border-radius:2px
+      }
+      .page-subtitle{
+        text-align:center;color:var(--muted);font-size:.95rem;margin:0 auto 1.25rem;max-width:62ch
       }
 
-      /* Header */
-      header {
-        background: rgba(255, 255, 255);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        height: 75px;
-        display: flex;
-        top: 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
+      /* Tools row */
+      .tools{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:1rem 0 1.25rem}
+      .search{position:relative;flex:1;min-width:260px}
+      .search input{
+        width:100%;padding:12px 42px 12px 40px;border:1px solid var(--card-border);border-radius:14px;background:#fff;
+        outline:none;color:var(--ink);transition:border-color .2s, box-shadow .2s
+      }
+      .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+      .search .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none}
+      .search .clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:transparent;font-size:16px;cursor:pointer;color:#9ca3af}
+
+      .chips{display:flex;gap:.5rem;flex-wrap:wrap}
+      .chip{
+        padding:8px 12px;border:1px solid var(--card-border);border-radius:999px;background:#fff;color:#111;font-size:.84rem;
+        cursor:pointer;user-select:none;transition:all .2s ease
+      }
+      .chip:hover{transform:translateY(-1px)}
+      .chip.active{border-color:#93c5fd;background:#eff6ff}
+
+      /* Grid */
+      .ebooks-grid{
+        display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:.5rem
       }
 
-      .header-inner {
-        padding: 1rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      /* Card (collapsible via <details>) */
+      details.category-card{
+        background:var(--card);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;
+        box-shadow:0 2px 10px rgba(2, 6, 23, 0.04);transition:transform .2s ease, box-shadow .2s ease
       }
-      .logo img {
-        max-height: 60px;
+      details.category-card[open]{box-shadow:0 10px 30px rgba(2, 6, 23, 0.08)}
+      details.category-card:hover{transform:translateY(-2px)}
+      summary.category-header{
+        list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+        background:#f1f5f9;padding:.9rem 1rem;cursor:pointer
       }
-      /* Navigation */
-      nav {
-        position: relative;
+      summary.category-header::-webkit-details-marker{display:none}
+      .cat-title{font-weight:700;color:var(--primary-color);display:flex;align-items:center;gap:.5rem}
+      .count-badge{
+        font-size:.75rem;color:#0f172a;background:#e2e8f0;border:1px solid #cbd5e1;border-radius:999px;padding:4px 8px
       }
-      nav ul {
-        display: flex;
-        gap: 20px;
-      }
-      nav ul li {
-        position: relative;
-      }
-      nav ul li a {
-        padding: 10px 15px;
-        /* font-weight: 600; */
-        font-size: 0.9rem;
-        border-radius: 4px;
-        transition: 0.3s all;
-      }
+      .chev{transition:transform .2s ease}
+      details[open] .chev{transform:rotate(180deg)}
 
-      nav ul li a::before {
-        content: "";
-        position: absolute;
-        /* top: 0; */
-        bottom: 1.5px;
-        left: 50%;
-        width: 0%;
-        height: 0.2rem;
-        background: #e8e8e8;
-        border-radius: 25px;
-        transition: 300ms all;
+      .ebook-list{padding:1rem}
+      .ebook-list li+li{margin-top:.6rem}
+      .ebook-link{
+        display:flex;align-items:center;gap:.6rem;padding:.65rem .75rem;border:1px solid transparent;border-radius:12px;
+        transition:background .2s ease, border-color .2s ease, transform .2s ease;color:var(--ink)
       }
+      .ebook-link:hover{background:#f8fafc;border-color:#e5e7eb;transform:translateX(2px)}
+      .ebook-link:focus-visible{outline:2px solid #93c5fd;outline-offset:2px}
+      .link-icon{font-size:1rem;opacity:.7}
+      .ext{margin-left:auto;font-size:.85rem;opacity:.6}
 
-      nav ul li a:hover::before {
-        content: "";
-        left: 0%;
-        width: 100%;
-      }
-      nav ul li a:hover,
-      nav ul li.active > a {
-        /* background: #0274ffe6;/ */
-        color: #333;
-      }
-      /* Dropdown Menu with Smooth Transition (Desktop) */
-      nav ul li ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        padding: 10px 0;
-        border-radius: 4px;
-        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
-        min-width: 180px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
-      }
-      nav ul li:hover > ul {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-      nav ul li ul li a {
-        padding: 8px 15px;
-        display: block;
-        color: #000;
-        transition: 0.3s all;
-      }
-      nav ul li ul li a:hover {
-        background: #063f8529;
-        /* color: #fff; */
-      }
+      /* Empty state */
+      .empty{display:none;text-align:center;padding:2rem;background:#fff;border:1px dashed #cbd5e1;border-radius:16px;color:#475569}
+      .empty.show{display:block}
 
-      .mobile-nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-      }
+      /* Fade-in utility */
+      .fade-in{animation:fadeIn .5s ease-in}
+      @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-      .fade-in {
-        animation: fadeIn 0.5s ease-in;
-      }
+      /* Mobile */
+      @media (max-width:768px){
+        .header-inner{flex-direction:column;gap:10px}
+        nav{display:none;width:100%}
+        nav.active{background:rgba(255,255,255,.98);backdrop-filter:blur(10px);padding:1rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+        nav ul{flex-direction:column;gap:10px}
+        .mobile-nav-toggle{display:block;position:absolute;top:20px;right:20px;color:#002349}
+        nav ul li ul{display:none;position:static;background:none;box-shadow:none;padding:0;margin-left:20px;opacity:1;transform:none}
+        nav ul li.open>ul{display:block}
+        nav ul li:hover>ul{display:none !important}
+        footer .footer-nav ul{flex-direction:column;gap:10px}
 
-      .page-title {
-        color: #466d9b;
-        font-size: 1, 5rem;
-        margin-bottom: 1rem;
-        margin-top: 1.7rem;
-        text-align: center;
-        position: relative;
-        padding-bottom: 0.75rem;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-      }
-
-      .page-title::after {
-        content: "";
-        position: absolute;
-        text-align: center;
-        bottom: 9px;
-        left: 43%;
-        width: 15%;
-        height: 3px;
-        background: linear-gradient(90deg, #466d9b, transparent);
-        border-radius: 2px;
-      }
-
-      .ebooks-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
-        gap: 2rem;
-      }
-
-      .category-card {
-        background: white;
-        border-radius: 8px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .category-header {
-        background-color: #f0fff4;
-        padding: 0.5rem;
-        border-radius: 4px;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        color: var(--primary-color);
-      }
-
-      .ebook-list {
-        list-style: none;
-      }
-
-      .ebook-list li {
-        margin-bottom: 0.75rem;
-      }
-
-      .ebook-list a {
-        color: var(--text-color);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .ebook-list a:hover {
-        color: var(--accent-color);
-      }
-
-      @media (max-width: 768px) {
-        .header-inner {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Hide desktop nav; show toggle button */
-        nav {
-          display: none;
-          width: 100%;
-        }
-        nav.active {
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(10px);
-          padding: 1rem;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Display the mobile nav toggle */
-        .mobile-nav-toggle {
-          display: block;
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          color: #002349;
-        }
-        /* Override dropdown styles for mobile */
-        nav ul li ul {
-          display: none; /* Hidden by default */
-          position: static; /* Remove absolute positioning */
-          background: none;
-          box-shadow: none;
-          padding: 0;
-          margin-left: 20px; /* Indent submenu items */
-          opacity: 1; /* Ensure it’s visible when toggled */
-          transform: none;
-        }
-        nav ul li.open > ul {
-          display: block;
-        }
-        /* Override hover behavior on mobile so that hover does not trigger dropdowns */
-        nav ul li:hover > ul {
-          display: none !important;
-        }
-        footer .footer-nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .ebooks-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          gap: 2rem;
-        }
-
-        nav ul li a::before {
-          content: "";
-          position: absolute;
-          /* top: 0; */
-          bottom: 1.5px;
-          left: 50%;
-          width: 0%;
-          height: 0.2rem;
-          background: #aaaaaa00;
-          border-radius: 25px;
-          transition: 300ms all;
-        }
-
-        footer > .container .footer-nav > ul {
-          display: none;
-          /* display: flex; */
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-        }
-      }
-
-      /* Footer */
-      footer {
-        background: linear-gradient(145deg, #466d9b, #2c3e50);
-        color: #fff;
-        padding: 2rem 0;
-        margin-top: 4rem;
-      }
-
-      footer .footer-nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        font-size: 0.75rem;
-        margin-bottom: 2rem;
-      }
-
-      footer .footer-nav ul li a {
-        color: #fff;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      footer .footer-nav ul li a:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      footer > .container > p {
-        font-size: 0.8rem;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        .chips{width:100%}
+        .ebooks-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
       }
     </style>
   </head>
   <body>
-    <!-- Header Section -->
+    <!-- ===== Header Section (unchanged) ===== -->
     <header>
       <div class="container header-inner">
         <div class="logo">
-          <a
-            href="../../index.html"
-            title="Igbinedion University E-Library Home"
-          >
-            <img
-              src="../../images/IUO_logo.png"
-              alt="Igbinedion University Logo"
-            />
+          <a href="../../index.html" title="Igbinedion University E-Library Home">
+            <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
           </a>
         </div>
-        <!-- Mobile Nav Toggle Button -->
         <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
           <span class="material-icons">menu</span>
         </button>
@@ -371,188 +166,206 @@
             <li>
               <a href="#">About</a>
               <ul>
-                <li>
-                  <a href="../about-us/library-staff.html">About the Library</a>
-                </li>
-                <li>
-                  <a href="../about-us/librarian.html">Librarian</a>
-                </li>
-                <li>
-                  <a href="../about-us/library-staff.html">Library Staff</a>
-                </li>
+                <li><a href="../about-us.html">About the Library</a></li>
+                <li><a href="../about-us/librarian.html">Librarian</a></li>
+                <li><a href="../about-us/library-staff.html">Library Staff</a></li>
               </ul>
             </li>
             <li>
               <a href="#">E-Library Resources</a>
               <ul>
-                <li>
-                  <a href="https://ourdatabase.com.ng/iuoelib/" target="_blank"
-                    >Subscribed Databases</a
-                  >
-                </li>
-                <li>
-                  <a href="../databases.html">Databases</a>
-                </li>
-                <li>
-                  <a href="../find-information/ebooks.html">E-Books</a>
-                </li>
-                <li>
-                  <a href="../find-information/e-journals.html">E-Journals</a>
-                </li>
-                <li>
-                  <a href="../find-information/reference-resources.html"
-                    >Reference</a
-                  >
-                </li>
-                <li>
-                  <a href="../find-information/open-courseware.html"
-                    >Open Courseware</a
-                  >
-                </li>
-                <li>
-                  <a href="..//find-information/programmes.html"
-                    >Programmes and E-Books</a
-                  >
-                </li>
+                <li><a href="https://ourdatabase.com.ng/iuoelib/" target="_blank" rel="noopener">Subscribed Databases</a></li>
+                <li><a href="../databases.html">Databases</a></li>
+                <li><a href="../find-information/ebooks.html">E-Books</a></li>
+                <li><a href="../find-information/e-journals.html">E-Journals</a></li>
+                <li><a href="../find-information/reference-resources.html">Reference</a></li>
+                <li><a href="../find-information/open-courseware.html">Open Courseware</a></li>
+                <li><a href="..//find-information/programmes.html">Programmes and E-Books</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Our Services</a>
               <ul>
-                <li>
-                  <a href="../ours-services/ask-a-librarian.html"
-                    >Ask a Librarian</a
-                  >
-                </li>
+                <li><a href="../ours-services/ask-a-librarian.html">Ask a Librarian</a></li>
               </ul>
             </li>
 
-            <li>
-              <a
-                href="../ours-services/ask-a-librarian.html#contact-info-section"
-                >Contact Us</a
-              >
-            </li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+            <li><a href="#">Student Projects/Thesis</a></li>
+            <li><a href="https://acadrespub.com/" target="_blank" rel="noopener">Journal Publication</a></li>
+            <li><a href="#" target="_blank">News</a></li>
+            <li><a href="http://opac.futminna.edu.ng:8054/" target="_blank" rel="noopener">OPAC</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
+    <!-- ===== Main (redesigned) ===== -->
     <main class="main-container fade-in">
-      <h1 class="page-title">e-Books Collection</h1>
+      <div class="container">
+        <h1 class="page-title">e-Books Collection</h1>
+        <p class="page-subtitle">Browse curated links to high-quality, open resources across disciplines. Use search or tap a category chip to filter.</p>
 
-      <div class="ebooks-grid fade-in">
-        <!-- Administrative Studies -->
-        <div class="category-card">
-          <div class="category-header">Administrative Studies</div>
-          <ul class="ebook-list">
-            <li>
-              <a
-                href="https://bookboon.com/en/search?query=accounting"
-                target="_blank"
-                >Accounting Textbooks</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.pdfdrive.com/introduction-to-business-management-books.html"
-                target="_blank"
-                >Business Management</a
-              >
-            </li>
-            <li>
-              <a href="https://openstax.org/subjects/business" target="_blank"
-                >Business Resources</a
-              >
-            </li>
-          </ul>
+        <div class="tools">
+          <div class="search" role="search">
+            <span class="icon" aria-hidden="true">🔎</span>
+            <input id="searchInput" type="search" placeholder="Search titles & subjects…" aria-label="Search e-book links" />
+            <button class="clear" id="clearSearch" aria-label="Clear search">✕</button>
+          </div>
+          <div class="chips" id="chips">
+            <button class="chip active" data-cat="all">All</button>
+            <button class="chip" data-cat="Administrative Studies">Administrative</button>
+            <button class="chip" data-cat="Communication Technology">Communication Tech</button>
+            <button class="chip" data-cat="Science & Technology">Science & Tech</button>
+            <button class="chip" data-cat="Engineering">Engineering</button>
+            <button class="chip" data-cat="Extensive E-Books Links">Extensive Links</button>
+          </div>
         </div>
 
-        <!-- Communication Technology -->
-        <div class="category-card fade-in">
-          <div class="category-header">Communication Technology</div>
-          <ul class="ebook-list">
-            <li>
-              <a
-                href="https://www.pdfdrive.com/mass-communication-books.html"
-                target="_blank"
-                >Mass Communication</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://bookboon.com/en/search?query=communication"
-                target="_blank"
-                >Communication Studies</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://open.umn.edu/opentextbooks/textbooks?term=communication"
-                target="_blank"
-                >Open Resources</a
-              >
-            </li>
-          </ul>
+        <div class="ebooks-grid" id="grid">
+          <!-- Administrative -->
+          <details class="category-card" open data-cat="Administrative Studies">
+            <summary class="category-header">
+              <span class="cat-title">Administrative Studies <span class="count-badge" data-count>0</span></span>
+              <span class="chev">▾</span>
+            </summary>
+            <ul class="ebook-list">
+              <li>
+                <a class="ebook-link" href="https://bookboon.com/en/search?query=accounting" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Accounting Textbooks <span class="ext">bookboon.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://www.pdfdrive.com/introduction-to-business-management-books.html" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Business Management <span class="ext">pdfdrive.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://openstax.org/subjects/business" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Business Resources (OpenStax) <span class="ext">openstax.org</span>
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Communication Technology -->
+          <details class="category-card" open data-cat="Communication Technology">
+            <summary class="category-header">
+              <span class="cat-title">Communication Technology <span class="count-badge" data-count>0</span></span>
+              <span class="chev">▾</span>
+            </summary>
+            <ul class="ebook-list">
+              <li>
+                <a class="ebook-link" href="https://www.pdfdrive.com/mass-communication-books.html" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Mass Communication <span class="ext">pdfdrive.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://bookboon.com/en/search?query=communication" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Communication Studies <span class="ext">bookboon.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://open.umn.edu/opentextbooks/textbooks?term=communication" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Open Resources <span class="ext">open.umn.edu</span>
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Science & Technology -->
+          <details class="category-card" open data-cat="Science & Technology">
+            <summary class="category-header">
+              <span class="cat-title">Science & Technology <span class="count-badge" data-count>0</span></span>
+              <span class="chev">▾</span>
+            </summary>
+            <ul class="ebook-list">
+              <li>
+                <a class="ebook-link" href="https://bookboon.com/en/search?query=computer+science" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Computer Science <span class="ext">bookboon.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://openstax.org/subjects/math" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Mathematics (OpenStax) <span class="ext">openstax.org</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://www.pdfdrive.com/hospitality-management-books.html" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Hospitality Management <span class="ext">pdfdrive.com</span>
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Engineering -->
+          <details class="category-card" open data-cat="Engineering">
+            <summary class="category-header">
+              <span class="cat-title">Engineering <span class="count-badge" data-count>0</span></span>
+              <span class="chev">▾</span>
+            </summary>
+            <ul class="ebook-list">
+              <li>
+                <a class="ebook-link" href="https://bookboon.com/en/search?query=electrical+engineering" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Electrical Engineering <span class="ext">bookboon.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://www.pdfdrive.com/search?q=mechanical+engineering" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Mechanical Engineering <span class="ext">pdfdrive.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://www.pdfdrive.com/search?q=civil+engineering" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Civil Engineering <span class="ext">pdfdrive.com</span>
+                </a>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Extensive Links -->
+          <details class="category-card" open data-cat="Extensive E-Books Links">
+            <summary class="category-header">
+              <span class="cat-title">Extensive E-Books Links <span class="count-badge" data-count>0</span></span>
+              <span class="chev">▾</span>
+            </summary>
+            <ul class="ebook-list">
+              <li>
+                <a class="ebook-link" href="https://www.nap.edu/" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> National Academies – Sciences/Engineering/Medicine <span class="ext">nap.edu</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="http://oare.oaresciences.org/content/en/journals.php" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> OARE Sciences <span class="ext">oaresciences.org</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://onlinebooks.library.upenn.edu/" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> The Online Books Page <span class="ext">upenn.edu</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://boldscholar.com/" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> BoldScholar <span class="ext">boldscholar.com</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://doabooks.org/" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Directory of Open Access Books <span class="ext">doabooks.org</span>
+                </a>
+              </li>
+              <li>
+                <a class="ebook-link" href="https://www.gutenberg.org/" target="_blank" rel="noopener">
+                  <span class="link-icon">↗</span> Project Gutenberg <span class="ext">gutenberg.org</span>
+                </a>
+              </li>
+            </ul>
+          </details>
         </div>
 
-        <!-- Science & Technology -->
-        <div class="category-card fade-in">
-          <div class="category-header">Science & Technology</div>
-          <ul class="ebook-list">
-            <li>
-              <a
-                href="https://bookboon.com/en/search?query=computer+science"
-                target="_blank"
-                >Computer Science</a
-              >
-            </li>
-            <li>
-              <a href="https://openstax.org/subjects/math" target="_blank"
-                >Mathematics</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.pdfdrive.com/hospitality-management-books.html"
-                target="_blank"
-                >Hospitality Management</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Engineering -->
-        <div class="category-card fade-in">
-          <div class="category-header">Engineering</div>
-          <ul class="ebook-list">
-            <li>
-              <a
-                href="https://bookboon.com/en/search?query=electrical+engineering"
-                target="_blank"
-                >Electrical Engineering</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.pdfdrive.com/search?q=mechanical+engineering"
-                target="_blank"
-                >Mechanical Engineering</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.pdfdrive.com/search?q=civil+engineering"
-                target="_blank"
-                >Civil Engineering</a
-              >
-            </li>
-          </ul>
+        <div class="empty" id="emptyState">
+          No matches. Try a different keyword or switch category.
         </div>
       </div>
     </main>
@@ -566,15 +379,80 @@
             <li><a href="#">E-Library Resources</a></li>
             <li><a href="services.html">Our Services</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="https://acadrespub.com/" target="_blank" rel="noopener">Journal Publication</a></li>
           </ul>
         </div>
         <p>&copy; 2025 Igbinedion University E-Library. All rights reserved.</p>
       </div>
     </footer>
+
+    <script>
+      // ----- Main body interactivity (search + chips + counts) -----
+      (function(){
+        const grid = document.getElementById('grid');
+        const cards = Array.from(grid.querySelectorAll('details.category-card'));
+        const counts = grid.querySelectorAll('[data-count]');
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearch');
+        const chips = Array.from(document.getElementById('chips').querySelectorAll('.chip'));
+        const empty = document.getElementById('emptyState');
+
+        // Set counts per card
+        cards.forEach(card=>{
+          const c = card.querySelectorAll('.ebook-list li').length;
+          const badge = card.querySelector('[data-count]');
+          if(badge) badge.textContent = c;
+        });
+
+        function activeCategory(){
+          const chip = chips.find(c => c.classList.contains('active'));
+          return chip ? chip.dataset.cat : 'all';
+        }
+
+        function filter(){
+          const q = searchInput.value.trim().toLowerCase();
+          const cat = activeCategory();
+          let anyVisible = false;
+
+          cards.forEach(card=>{
+            // Category filter (card level)
+            const matchCat = (cat === 'all') || (card.dataset.cat === cat);
+
+            // Text filter (item level)
+            const items = Array.from(card.querySelectorAll('.ebook-list li'));
+            let anyItemVisible = false;
+
+            items.forEach(li=>{
+              const txt = li.textContent.toLowerCase();
+              const matchText = !q || txt.includes(q);
+              li.style.display = matchText ? '' : 'none';
+              if(matchText) anyItemVisible = true;
+            });
+
+            // Show card only if category matches AND it has at least 1 visible item
+            const showCard = matchCat && anyItemVisible;
+            card.style.display = showCard ? '' : 'none';
+            if(showCard) anyVisible = true;
+          });
+
+          empty.classList.toggle('show', !anyVisible);
+        }
+
+        // Events
+        searchInput.addEventListener('input', filter);
+        clearBtn.addEventListener('click', ()=>{ searchInput.value=''; filter(); searchInput.focus(); });
+
+        chips.forEach(chip=>{
+          chip.addEventListener('click', ()=>{
+            chips.forEach(c=>c.classList.remove('active'));
+            chip.classList.add('active');
+            filter();
+          });
+        });
+
+        // Initial filter
+        filter();
+      })();
+    </script>
   </body>
 </html>

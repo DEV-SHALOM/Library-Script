@@ -3,494 +3,249 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="Website Icon"
-      href="../../images/IUO_logo-removebg-preview.png"
-    />
     <title>Ask a Librarian - IUOL</title>
+
+    <!-- Favicon -->
+    <link rel="Website Icon" href="../../images/IUO_logo-removebg-preview.png" />
+
+    <!-- Material Icons for the mobile menu icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      :root{
+        --primary-color:#466d9b;
       }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
-        color: #444;
-        /* background-color: var(--background-color); */
+      *{margin:0;padding:0;box-sizing:border-box}
+
+      body{
+        font-family:"Poppins",sans-serif;
+        line-height:1.6;
+        color:#444;
       }
 
-      a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
-      }
+      a{ text-decoration:none; color:inherit; transition:color .3s ease; }
+      a:hover{ color:#fff; }
 
-      a:hover {
-        color: #fff;
-      }
+      img{ max-width:100%; display:block; }
+      ul{ list-style:none; }
 
-      img {
-        max-width: 100%;
-        display: block;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      /* Container */
-      .container {
-        width: 90%;
-        max-width: 1280px;
-        margin: 0 auto;
-      }
+      .container{ width:90%; max-width:1280px; margin:0 auto; }
 
       /* Header */
-      header {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        height: 75px;
-        display: flex;
-        top: 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
-        /* border-bottom: 5px solid #faeb17; */
+      header{
+        background:rgba(255,255,255,.95);
+        backdrop-filter:blur(10px);
+        box-shadow:0 2px 20px rgba(0,0,0,.05);
+        position:sticky; top:0; z-index:1000;
+        height:75px; display:flex; transition:all .3s ease;
       }
+      .header-inner{ padding:1rem 0; display:flex; justify-content:space-between; align-items:center; }
 
-      .header-inner {
-        padding: 1rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .logo img {
-        max-height: 60px;
-      }
+      /* Keep logo image clean (no link styles) */
+      .logo a{ display:inline-block; line-height:0; }
+      .logo img{ max-height:40px; border:none; outline:none; box-shadow:none; }
+      .logo a:hover{ color:inherit; }
 
       /* Navigation */
-      nav {
-        position: relative;
+      nav{ position:relative; }
+      nav ul{ display:flex; }
+      nav ul li{ position:relative; }
+      nav ul li a{
+        padding:10px 15px; font-size:.9rem; border-radius:4px; transition:.3s all; position:relative;
+      }
+      nav ul li a::before{
+        content:""; position:absolute; bottom:1.5px; left:50%; width:0%; height:.2rem;
+        background:#e8e8e8; border-radius:25px; transition:300ms all;
+      }
+      nav ul li a:hover::before{ left:0%; width:100%; }
+      nav ul li a:hover, nav ul li.active > a{ color:#333; }
+
+      /* Dropdown */
+      nav ul li ul{
+        display:flex; flex-direction:column; position:absolute; top:100%; left:0;
+        background:#fff; padding:10px 0; border-radius:4px;
+        box-shadow:0 0 100px rgba(0,0,0,.2); min-width:180px;
+        opacity:0; visibility:hidden; transform:translateY(10px);
+        transition:opacity .3s ease, transform .3s ease; z-index:1000;
+      }
+      nav ul li:hover > ul{ opacity:1; visibility:visible; transform:translateY(0); }
+      nav ul li ul li a{ padding:8px 15px; display:block; color:#000; transition:.3s all; }
+      nav ul li ul li a:hover{ background:#063f8529; }
+
+      .mobile-nav-toggle{
+        display:none; background:none; border:none; font-size:2rem; cursor:pointer;
       }
 
-      nav ul {
-        display: flex;
-        gap: 20px;
+      /* Main */
+      .main-container{ max-width:1280px; margin:2rem auto; padding:0 1rem; }
+
+      .page-title{
+        color:#466d9b; font-size:1.5rem; margin:1.7rem 0 1rem;
+        text-align:center; position:relative; padding-bottom:.75rem;
+        font-weight:700; letter-spacing:-.5px;
+      }
+      .page-title::after{
+        content:""; position:absolute; bottom:9px; left:50%; transform:translateX(-50%);
+        width:15%; height:3px; background:linear-gradient(90deg,#466d9b,transparent); border-radius:2px;
       }
 
-      nav ul li {
-        position: relative;
+      .ask-librarian-section{
+        background:#fff; border-radius:8px; padding:2rem; margin-bottom:2rem;
       }
 
-      nav ul li a {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-        border-radius: 4px;
-        transition: 0.3s all;
+      .contact-info-section{
+        background:#fff; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,.1);
+        padding:2rem;
       }
 
-      nav ul li a::before {
-        content: "";
-        position: absolute;
-        bottom: 1.5px;
-        left: 50%;
-        width: 0%;
-        height: 0.2rem;
-        background: #e8e8e8;
-        border-radius: 25px;
-        transition: 300ms all;
+      .contact-methods{
+        display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem;
       }
-
-      nav ul li a:hover::before {
-        content: "";
-        left: 0%;
-        width: 100%;
+      .contact-method{
+        text-align:center; padding:1.5rem; border-radius:8px; background:#f8f9fa;
+        transition:transform .3s ease, box-shadow .3s ease;
       }
+      .contact-method:hover{ transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,.05); }
+      .contact-icon{ font-size:2rem; color:var(--primary-color); margin-bottom:1rem; }
+      .contact-title{ font-weight:600; margin-bottom:.5rem; }
+      .contact-details{ color:#666; }
 
-      nav ul li a:hover,
-      nav ul li.active > a {
-        color: #333;
-      }
-
-      /* Dropdown Menu */
-      nav ul li ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        padding: 10px 0;
-        border-radius: 4px;
-        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
-        min-width: 180px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
-      }
-
-      nav ul li:hover > ul {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-
-      nav ul li ul li a {
-        padding: 8px 15px;
-        display: block;
-        color: #000;
-        transition: 0.3s all;
-      }
-
-      nav ul li ul li a:hover {
-        background: #063f8529;
-      }
-
-      .mobile-nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-        /* color: #fff; */
-      }
-
-      /* Main Content */
-      .main-container {
-        max-width: 1280px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-
-      .page-title {
-        color: #466d9b;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        margin-top: 1.7rem;
-        text-align: center;
-        position: relative;
-        padding-bottom: 0.75rem;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-      }
-
-      .page-title::after {
-        content: "";
-        position: absolute;
-        text-align: center;
-        bottom: 9px;
-        left: 43%;
-        width: 15%;
-        height: 3px;
-        background: linear-gradient(90deg, #466d9b, transparent);
-        border-radius: 2px;
-      }
-
-      /* Ask a Librarian Form Section */
-      .ask-librarian-section {
-        background: white;
-        border-radius: 8px;
-        padding: 2rem;
-        /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-        margin-bottom: 2rem;
-      }
-
-      /* Contact Information Section */
-      .contact-info-section {
-        background: white;
-        border-radius: 8px;
-        /* padding: 2rem; */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .contact-methods {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-      }
-
-      .contact-method {
-        text-align: center;
-        padding: 1.5rem;
-        border-radius: 8px;
-        background-color: #f8f9fa;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .contact-method:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      }
-
-      .contact-icon {
-        font-size: 2rem;
-        color: var(--primary-color);
-        margin-bottom: 1rem;
-      }
-
-      .contact-title {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-
-      .contact-details {
-        color: #666;
-      }
-
-      .fade-in {
-        animation: fadeIn 0.5s ease-in;
+      .fade-in{ animation:fadeIn .5s ease-in; }
+      @keyframes fadeIn{
+        from{ opacity:0; transform:translateY(20px); }
+        to{ opacity:1; transform:translateY(0); }
       }
 
       /* Footer */
-      footer {
-        background: linear-gradient(145deg, #466d9b, #2c3e50);
-        color: #fff;
-        padding: 2rem 0;
-        margin-top: 4rem;
+      footer{
+        background:linear-gradient(145deg,#466d9b,#2c3e50);
+        color:#fff; padding:2rem 0; margin-top:4rem;
       }
-
-      footer .footer-nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        font-size: 0.75rem;
-        margin-bottom: 2rem;
+      footer .footer-nav ul{
+        display:flex; justify-content:center; gap:2rem;
+        font-size:.75rem; margin-bottom:2rem;
       }
+      footer .footer-nav ul li a{ color:#fff; opacity:.8; transition:all .3s ease; }
+      footer .footer-nav ul li a:hover{ opacity:1; transform:translateY(-2px); }
+      footer > .container > p{ font-size:.8rem; }
 
-      footer .footer-nav ul li a {
-        color: #fff;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      footer .footer-nav ul li a:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      footer > .container > p {
-        font-size: 0.8rem;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
+      /* Responsive */
+      @media (max-width:768px){
+        .header-inner{ flex-direction:column; gap:10px; }
+        nav{ display:none; width:100%; }
+        nav.active{
+          background:rgba(255,255,255,.98); backdrop-filter:blur(10px);
+          padding:1rem; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.1);
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+        nav ul{ flex-direction:column; gap:10px; }
+        .mobile-nav-toggle{ display:block; position:absolute; top:20px; right:20px; color:#002349; }
 
-      @media (max-width: 768px) {
-        .header-inner {
-          flex-direction: column;
-          gap: 10px;
-        }
+        /* Mobile dropdown behavior overrides */
+        nav ul li ul{ display:none; position:static; background:none; box-shadow:none; padding:0; margin-left:20px; opacity:1; transform:none; }
+        nav ul li.open > ul{ display:block; }
+        nav ul li:hover > ul{ display:none !important; } /* prevent hover from opening on touch */
 
-        nav {
-          display: none;
-          width: 100%;
-        }
-
-        nav.active {
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(10px);
-          padding: 1rem;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .mobile-nav-toggle {
-          display: block;
-          position: absolute;
-          top: 20px;
-          right: 20px;
-        }
-
-        nav ul li ul {
-          display: none;
-          position: static;
-          background: none;
-          box-shadow: none;
-          padding: 0;
-          margin-left: 20px;
-          opacity: 1;
-          transform: none;
-        }
-
-        nav ul li.open > ul {
-          display: block;
-        }
-
-        nav ul li:hover > ul {
-          display: none !important;
-        }
-
-        footer .footer-nav ul {
-          flex-direction: column;
-          gap: 10px;
-          align-items: center;
-        }
-
-        nav ul li a::before {
-          background: transparent;
-        }
+        footer .footer-nav ul{ flex-direction:column; gap:10px; align-items:center; }
+        nav ul li a::before{ background:transparent; }
       }
     </style>
   </head>
   <body>
-    <!-- Header Section -->
+    <!-- Header -->
     <header>
       <div class="container header-inner">
         <div class="logo">
-          <a
-            href="../../index.html"
-            title="Igbinedion University E-Library Home"
-          >
-            <img
-              src="../../images/IUO_logo.png"
-              alt="Igbinedion University Logo"
-            />
+          <a href="../../index.html" title="Igbinedion University E-Library Home">
+            <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
           </a>
         </div>
+
         <!-- Mobile Nav Toggle Button -->
-        <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
-          <span class="material-icons">menu</span>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation" aria-controls="site-nav" aria-expanded="false">
+          <span class="material-icons" aria-hidden="true">menu</span>
         </button>
-        <nav>
+
+        <nav id="site-nav">
           <ul>
             <li class="active"><a href="../../index.html">Home</a></li>
             <li>
               <a href="#">About</a>
               <ul>
-                <li>
-                  <a href="../about-us/library-staff.html">About the Library</a>
-                </li>
-                <li>
-                  <a href="../about-us/librarian.html">Librarian</a>
-                </li>
-                <li>
-                  <a href="../about-us/library-staff.html">Library Staff</a>
-                </li>
+                <li><a href="../about-us.html">About the Library</a></li>
+                <li><a href="../about-us/librarian.html">Librarian</a></li>
+                <li><a href="../about-us/library-staff.html">Library Staff</a></li>
               </ul>
             </li>
             <li>
               <a href="#">E-Library Resources</a>
               <ul>
-                <li>
-                  <a href="https://ourdatabase.com.ng/iuoelib/" target="_blank"
-                    >Subscribed Databases</a
-                  >
-                </li>
-                <li>
-                  <a href="../databases.html">Databases</a>
-                </li>
-                <li>
-                  <a href="../find-information/ebooks.html">E-Books</a>
-                </li>
-                <li>
-                  <a href="../find-information/e-journals.html">E-Journals</a>
-                </li>
-                <li>
-                  <a href="../find-information/reference-resources.html"
-                    >Reference</a
-                  >
-                </li>
-                <li>
-                  <a href="../find-information/open-courseware.html"
-                    >Open Courseware</a
-                  >
-                </li>
-                <li>
-                  <a href="../find-information/programmes.html"
-                    >Programmes and E-Books</a
-                  >
-                </li>
+                <li><a href="https://ourdatabase.com.ng/iuoelib/" target="_blank" rel="noopener">Subscribed Databases</a></li>
+                <li><a href="../databases.html">Databases</a></li>
+                <li><a href="../find-information/ebooks.html">E-Books</a></li>
+                <li><a href="../find-information/e-journals.html">E-Journals</a></li>
+                <li><a href="../find-information/reference-resources.html">Reference</a></li>
+                <li><a href="../find-information/open-courseware.html">Open Courseware</a></li>
+                <li><a href="../find-information/programmes.html">Programmes and E-Books</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Our Services</a>
               <ul>
-                <li>
-                  <a href="../ours-services/ask-a-librarian.html"
-                    >Ask a Librarian</a
-                  >
-                </li>
+                <li><a href="../ours-services/ask-a-librarian.html">Ask a Librarian</a></li>
               </ul>
             </li>
-
-            <li>
-              <a
-                href="../ours-services/ask-a-librarian.html#contact-info-section"
-                >Contact Us</a
-              >
-            </li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+            <li><a href="#">Student Projects/Thesis</a></li>
+            <li><a href="https://acadrespub.com/" target="_blank" rel="noopener">Journal Publication</a></li>
+            <li><a href="#" target="_blank">News</a></li>
+            <li><a href="http://opac.futminna.edu.ng:8054/" target="_blank" rel="noopener">OPAC</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
+    <!-- Main -->
     <main class="main-container fade-in">
       <h1 class="page-title">Ask a Librarian</h1>
 
-      <section class="ask-librarian-section">
-        <h2>Submit Your Question</h2>
-        <p>
-          Need help with your research? Have questions about library resources?
-        </p>
+      <section class="ask-librarian-section" aria-labelledby="ask-title">
+        <h2 id="ask-title">Submit Your Question</h2>
+        <p>Need help with your research? Have questions about library resources?</p>
+        <!-- (Optional) You can add a form here later -->
       </section>
 
-      <section class="contact-info-section" id="contact-info-section-form">
-        <h2>Other Ways to Contact Us</h2>
+      <!-- ID fixed to match the anchor in your menus -->
+      <section class="contact-info-section" id="contact-info-section" aria-labelledby="contact-title">
+        <h2 id="contact-title">Other Ways to Contact Us</h2>
         <div class="contact-methods">
           <div class="contact-method">
-            <div class="contact-icon">📞</div>
+            <div class="contact-icon" aria-hidden="true">📞</div>
             <h3 class="contact-title">Phone</h3>
-            <p class="contact-details">
-              <a href="tel:+2348034502392">Prof Abdulsalami L.T</a>
-            </p>
+            <p class="contact-details"><a href="tel:+2348034502392">Prof Abdulsalami L.T</a></p>
             <br />
-            <p class="contact-details">
-              <a href="tel:+2347038769657">Bonnie Obeka Obande (CLN)</a>
-            </p>
+            <p class="contact-details"><a href="tel:+2347038769657">Bonnie Obeka Obande (CLN)</a></p>
             <br />
-            <p class="contact-details">
-              <a href="tel:+2349077419634">Ekhaguosa, Vincent O (CLN)</a>
-            </p>
+            <p class="contact-details"><a href="tel:+2349077419634">Ekhaguosa, Vincent O (CLN)</a></p>
             <br />
-            <p class="contact-details">
-              <a href="tel:+2348056444527">Efosa Egharevba</a>
-            </p>
+            <p class="contact-details"><a href="tel:+2348056444527">Efosa Egharevba</a></p>
             <br />
             <p class="contact-details">Monday - Friday, 8:00 AM - 4:00 PM</p>
           </div>
+
           <div class="contact-method">
-            <div class="contact-icon">✉️</div>
+            <div class="contact-icon" aria-hidden="true">✉️</div>
             <h3 class="contact-title">Email</h3>
-            <p class="contact-details">library@iuol.edu.ng</p>
+            <p class="contact-details">
+              <a href="mailto:library@iuol.edu.ng?subject=Ask%20a%20Librarian%20Inquiry">library@iuol.edu.ng</a>
+            </p>
             <p class="contact-details">We respond within 24 hours</p>
           </div>
+
           <div class="contact-method">
-            <div class="contact-icon">💬</div>
+            <div class="contact-icon" aria-hidden="true">💬</div>
             <h3 class="contact-title">Live Chat</h3>
             <p class="contact-details">Available on weekdays</p>
             <p class="contact-details">9:00 AM - 3:00 PM</p>
@@ -499,6 +254,7 @@
       </section>
     </main>
 
+    <!-- Footer -->
     <footer class="fade-in">
       <div class="container">
         <div class="footer-nav">
@@ -507,17 +263,9 @@
             <li><a href="./about-us.html">About Us</a></li>
             <li><a href="#">E-Library Resources</a></li>
             <li><a href="services.html">Our Services</a></li>
-            <li>
-              <a
-                href="../ours-services/ask-a-librarian.html#contact-info-section"
-                >Contact Us</a
-              >
-            </li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+            <li><a href="#">Student Projects/Thesis</a></li>
+            <li><a href="https://acadrespub.com/" target="_blank" rel="noopener">Journal Publication</a></li>
           </ul>
         </div>
         <p>&copy; 2025 Igbinedion University E-Library. All rights reserved.</p>
@@ -525,29 +273,29 @@
     </footer>
 
     <script>
-      // Simple mobile navigation toggle
+      // Mobile nav + dropdowns (robust, no :has selector)
       document.addEventListener("DOMContentLoaded", function () {
         const mobileToggle = document.querySelector(".mobile-nav-toggle");
-        const nav = document.querySelector("nav");
+        const nav = document.getElementById("site-nav");
 
-        mobileToggle.addEventListener("click", function () {
-          nav.classList.toggle("active");
-        });
+        if (mobileToggle && nav) {
+          mobileToggle.addEventListener("click", function () {
+            const expanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", String(!expanded));
+            nav.classList.toggle("active");
+          });
+        }
 
-        // Handle mobile dropdown toggles
-        const hasSubmenu = document.querySelectorAll("nav ul li ul");
-        const parentMenuItems = document.querySelectorAll("nav ul li:has(ul)");
+        // Parent items that have submenus
+        const parentItems = Array.from(nav.querySelectorAll("ul > li")).filter(li => li.querySelector("ul"));
 
-        parentMenuItems.forEach((item) => {
-          item.addEventListener("click", function (e) {
+        parentItems.forEach(li => {
+          const link = li.querySelector(":scope > a");
+          // Toggle on click for mobile
+          link.addEventListener("click", function (e) {
             if (window.innerWidth <= 768) {
-              if (
-                e.target.closest("li") === this &&
-                !e.target.closest("ul ul")
-              ) {
-                e.preventDefault();
-                this.classList.toggle("open");
-              }
+              e.preventDefault();
+              li.classList.toggle("open");
             }
           });
         });

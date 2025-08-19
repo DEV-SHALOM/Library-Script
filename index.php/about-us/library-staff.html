@@ -3,787 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <title>Igbinedion University Library</title>
-    <meta
-      name="keywords"
-      content="Library, Modern, University, Igbinedion University"
-    />
-    <meta
-      name="description"
-      content="Igbinedion University E-Library – A modern digital library experience"
-    />
+    <meta name="keywords" content="Library, Modern, University, Igbinedion University" />
+    <meta name="description" content="Igbinedion University E-Library – A modern digital library experience" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="Website Icon"
-      href="../../images/IUO_logo-removebg-preview.png"
-    />
+    <link rel="Website Icon" href="../../images/IUO_logo-removebg-preview.png" />
 
-    <!-- Google Fonts & Material Icons -->
+    <!-- Google Fonts & Material Icons (header unchanged) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-    <!-- Custom CSS -->
     <style>
-      /* Reset & Base Styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
-        color: #444;
-        /* background: linear-gradient(to top, #334c6694,#334c6690); */
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
-      }
-      a:hover {
-        color: #fff;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      ul {
-        list-style: none;
-      }
-      /* Container */
-      .container {
-        width: 90%;
-        max-width: 1280px;
-        margin: 0 auto;
-      }
+      /* ===== Base ===== */
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:"Poppins",sans-serif;line-height:1.6;color:#444}
+      a{text-decoration:none;color:inherit;transition:color .3s ease}
+      a:hover{color:#fff}
+      img{max-width:100%;display:block}
+      ul{list-style:none}
+      .container{width:90%;max-width:1280px;margin:0 auto}
 
-      /* Header */
-      header {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        height: 75px;
-        display: flex;
-        top: 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
+      /* ===== Header (UNTOUCHED) ===== */
+      header{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.05);position:sticky;height:75px;display:flex;top:0;z-index:1000;transition:all .3s ease}
+      .header-inner{padding:1rem 0;display:flex;justify-content:space-between;align-items:center}
+      .logo img{max-height:40px}
+      nav{position:relative}
+      nav ul{display:flex}
+      nav ul li{position:relative}
+      nav ul li a{padding:10px 15px;font-size:.9rem;border-radius:4px;transition:.3s all;position:relative}
+      nav ul li a::before{content:"";position:absolute;bottom:1.5px;left:50%;width:0;height:.2rem;background:#e8e8e8;border-radius:25px;transition:300ms all}
+      nav ul li a:hover::before{left:0;width:100%}
+      nav ul li a:hover,nav ul li.active>a{color:#333}
+      nav ul li ul{display:flex;flex-direction:column;position:absolute;top:100%;left:0;background:#fff;padding:10px 0;border-radius:4px;box-shadow:0 0 100px rgba(0,0,0,.2);min-width:180px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease;z-index:1000}
+      nav ul li:hover>ul{opacity:1;visibility:visible;transform:translateY(0)}
+      nav ul li ul li a{padding:8px 15px;display:block;color:#000;transition:.3s all}
+      nav ul li ul li a:hover{background:#063f8529}
+      .mobile-nav-toggle{display:none;background:none;border:none;font-size:2rem;cursor:pointer}
 
-      .header-inner {
-        padding: 1rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo img {
-        max-height: 60px;
-      }
-      /* Navigation */
-      nav {
-        position: relative;
-      }
-      nav ul {
-        display: flex;
-        gap: 20px;
-      }
-      nav ul li {
-        position: relative;
-      }
-      nav ul li a {
-        padding: 10px 15px;
-        /* font-weight: 600; */
-        font-size: 0.9rem;
-        border-radius: 4px;
-        transition: 0.3s all;
-      }
+      /* ===== Footer (unchanged) ===== */
+      footer{background:linear-gradient(145deg,#466d9b,#2c3e50);color:#fff;padding:2rem 0;margin-top:4rem}
+      footer .footer-nav ul{display:flex;justify-content:center;gap:2rem;font-size:.75rem;margin-bottom:2rem}
+      footer .footer-nav ul li a{color:#fff;opacity:.8;transition:all .3s ease}
+      footer .footer-nav ul li a:hover{opacity:1;transform:translateY(-2px)}
+      footer>.container>p{font-size:.8rem}
 
-      nav ul li a::before {
-        content: "";
-        position: absolute;
-        /* top: 0; */
-        bottom: 1.5px;
-        left: 50%;
-        width: 0%;
-        height: 0.2rem;
-        background: #e8e8e8;
-        border-radius: 25px;
-        transition: 300ms all;
+      /* ===== MAIN: Staff directory ===== */
+      :root{
+        --primary:#466d9b; --muted:#6b7280; --ring:#dbeafe;
+        --card:#ffffff; --card-border:#e5e7eb; --soft:#f8fafc;
       }
-
-      nav ul li a:hover::before {
-        content: "";
-        left: 0%;
-        width: 100%;
+      .main{padding:2rem 0 4rem;background:linear-gradient(180deg,#f7fbff 0%,#ffffff 100%)}
+      .title{
+        color:var(--primary);font-size:1.5rem;margin:1.7rem 0 .5rem;
+        text-align:center;position:relative;padding-bottom:.75rem;font-weight:700;letter-spacing:-.2px
       }
-      nav ul li a:hover,
-      nav ul li.active > a {
-        /* background: #0274ffe6;/ */
-        color: #333;
+      .title::after{
+        content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+        width:220px;max-width:60vw;height:3px;background:linear-gradient(90deg,var(--primary),transparent);border-radius:2px
       }
-      /* Dropdown Menu with Smooth Transition (Desktop) */
-      nav ul li ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        padding: 10px 0;
-        border-radius: 4px;
-        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
-        min-width: 180px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
+      .subtitle{ text-align:center;color:var(--muted);font-size:.95rem;margin:0 auto 1.25rem;max-width:70ch }
+
+      .toolbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:1rem 0 1.25rem}
+      .search{position:relative;flex:1;min-width:260px}
+      .search input{
+        width:100%;padding:12px 42px 12px 40px;border:1px solid var(--card-border);border-radius:14px;background:#fff;
+        outline:none;color:#1f2937;transition:border-color .2s,box-shadow .2s
       }
-      nav ul li:hover > ul {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+      .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+      .search .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none}
+      .search .clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:transparent;font-size:16px;cursor:pointer;color:#9ca3af}
+      .meta{font-size:.85rem;color:#475569;white-space:nowrap}
+
+      .chips{display:flex;gap:.5rem;flex-wrap:wrap}
+      .chip{
+        padding:8px 12px;border:1px solid var(--card-border);border-radius:999px;background:#fff;color:#111;font-size:.84rem;
+        cursor:pointer;user-select:none;transition:all .2s ease
       }
-      nav ul li ul li a {
-        padding: 8px 15px;
-        display: block;
-        color: #000;
-        transition: 0.3s all;
+      .chip:hover{transform:translateY(-1px)}
+      .chip.active{border-color:#93c5fd;background:#eff6ff}
+
+      /* Column layout = vertical reading order (top-to-bottom), preserves array order */
+      .wall{column-count:1;column-gap:1rem}
+      @media (min-width:640px){ .wall{column-count:2} }
+      @media (min-width:1024px){ .wall{column-count:3} }
+      .card{
+        display:inline-block;width:100%;margin:0 0 1rem;break-inside:avoid;
+        background:var(--card);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;
+        box-shadow:0 2px 10px rgba(2, 6, 23, 0.04);transition:transform .2s ease, box-shadow .2s ease;padding:14px
       }
-      nav ul li ul li a:hover {
-        background: #063f8529;
-        /* color: #fff; */
-      }
+      .card:hover{transform:translateY(-2px)}
+      .person{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center}
+      .avatar{width:72px;height:72px;border-radius:999px;overflow:hidden;background:#eef2ff;display:grid;place-items:center;border:1px solid #e5e7eb}
+      /* UPDATED: no display:none; fade-in via opacity */
+      .avatar img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .2s ease}
+      .avatar img.is-loaded{opacity:1}
+      .initials{font-weight:700;color:#4338ca}
+      .name{font-weight:700;color:#0f172a}
+      .quals{font-size:.8rem;color:#64748b;margin-top:2px}
+      .role{margin-top:6px;font-size:.85rem;color:#0f172a}
+      .tags{margin-top:8px;display:flex;gap:.4rem;flex-wrap:wrap}
+      .tag{font-size:.72rem;padding:4px 8px;border:1px solid #e5e7eb;border-radius:999px;background:#f8fafc;color:#334155}
 
-      /* Mobile Navigation Toggle */
-      .mobile-nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-      }
+      .empty{display:none;text-align:center;padding:2rem;background:#fff;border:1px dashed #cbd5e1;border-radius:16px;color:#475569;margin-top:1rem}
+      .empty.show{display:block}
 
-      /* section */
+      .fade-in{animation:fadeIn .5s ease-in}
+      @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-      /* Section Styles */
-      section {
-        /* padding: 3.5rem 2.5rem; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        /* width: 100%; */
-        gap: 5%;
-        background: linear-gradient(145deg, #ffffff, #f8f9fa);
-        margin: 3rem auto;
-        max-width: 1280px;
-        width: 90%;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(70, 109, 155, 0.1);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-      }
-
-      section:hover {
-        transform: translateY(-5px);
-      }
-
-      /* section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, #466d9b, #6891c0);
-      } */
-
-      section h2 {
-        color: #466d9b;
-        font-size: 1, 5rem;
-        margin-bottom: 2rem;
-        position: relative;
-        padding-bottom: 0.75rem;
-        font-weight: 600;
-        letter-spacing: -0.5px;
-      }
-
-      section h2::after {
-        content: "";
-        position: absolute;
-        bottom: 9px;
-        left: 0;
-        width: 15%;
-        height: 3px;
-        background: linear-gradient(90deg, #466d9b, transparent);
-        border-radius: 2px;
-      }
-
-      section p {
-        color: #2c3e50;
-        font-size: 0.95rem;
-        line-height: 1.8;
-        margin-bottom: 1.8rem;
-        text-align: justify;
-        transition: all 0.3s ease;
-        padding: 1rem;
-        border-radius: 8px;
-      }
-
-      section p:hover {
-        background: rgba(70, 109, 155, 0.03);
-        transform: translateX(5px);
-      }
-
-      section ul {
-        margin: 2rem 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-      }
-
-      section ol {
-        background: rgba(70, 109, 155, 0.05);
-        padding: 1.2rem 1.5rem;
-        border-radius: 12px;
-        margin: 0.5rem;
-        color: #466d9b;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(70, 109, 155, 0.1);
-        /* cursor: pointer; */
-      }
-
-      section ol:hover {
-        background: rgba(70, 109, 155, 0.1);
-        transform: translateX(10px);
-        box-shadow: 0 4px 15px rgba(70, 109, 155, 0.1);
-      }
-
-      /* Additional Spacing Utilities */
-      .mt-2 {
-        margin-top: 2rem;
-      }
-
-      .mb-2 {
-        margin-bottom: 2rem;
-      }
-
-      .py-2 {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-      }
-
-      /* Footer */
-      footer {
-        background: linear-gradient(145deg, #466d9b, #2c3e50);
-        color: #fff;
-        padding: 2rem 0;
-        margin-top: 4rem;
-      }
-
-      footer .footer-nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        font-size: 0.75rem;
-        margin-bottom: 2rem;
-      }
-
-      footer .footer-nav ul li a {
-        color: #fff;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      footer .footer-nav ul li a:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      footer > .container > p {
-        font-size: 0.8rem;
-      }
-
-      /* Responsive Styles */
-      @media (max-width: 768px) {
-        .header-inner {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Hide desktop nav; show toggle button */
-        nav {
-          display: none;
-          width: 100%;
-        }
-        nav.active {
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(10px);
-          padding: 1rem;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Display the mobile nav toggle */
-        .mobile-nav-toggle {
-          display: block;
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          color: #002349;
-        }
-        /* Override dropdown styles for mobile */
-        nav ul li ul {
-          display: none; /* Hidden by default */
-          position: static; /* Remove absolute positioning */
-          background: none;
-          box-shadow: none;
-          padding: 0;
-          margin-left: 20px; /* Indent submenu items */
-          opacity: 1; /* Ensure it’s visible when toggled */
-          transform: none;
-        }
-        nav ul li.open > ul {
-          display: block;
-        }
-        /* Override hover behavior on mobile so that hover does not trigger dropdowns */
-        nav ul li:hover > ul {
-          display: none !important;
-        }
-        footer .footer-nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        nav ul li a::before {
-          content: "";
-          position: absolute;
-          /* top: 0; */
-          bottom: 1.5px;
-          left: 50%;
-          width: 0%;
-          height: 0.2rem;
-          background: #aaaaaa00;
-          border-radius: 25px;
-          transition: 300ms all;
-        }
-
-        footer > .container .footer-nav > ul {
-          display: none;
-          /* display: flex; */
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-        }
-
-        /* Section */
-
-        section {
-          padding: 2rem 1.5rem;
-          margin: 1.5rem auto;
-        }
-
-        section h2 {
-          font-size: 2rem;
-        }
-
-        section p {
-          font-size: 0.95rem;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        section ul {
-          grid-template-columns: 1fr;
-        }
-
-        section ol {
-          padding: 1rem;
-          margin: 0.3rem 0;
-        }
-      }
-
-      .fade-in {
-        animation: fadeIn 0.5s ease-in;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      @media (max-width:768px){
+        .header-inner{flex-direction:column;gap:10px}
+        nav{display:none;width:100%}
+        nav.active{background:rgba(255,255,255,.98);backdrop-filter:blur(10px);padding:1rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+        nav ul{flex-direction:column;gap:10px}
+        .mobile-nav-toggle{display:block;position:absolute;top:20px;right:20px;color:#002349}
+        nav ul li ul{display:none;position:static;background:none;box-shadow:none;padding:0;margin-left:20px;opacity:1;transform:none}
+        nav ul li.open>ul{display:block}
+        nav ul li:hover>ul{display:none !important}
+        footer .footer-nav ul{flex-direction:column;gap:10px}
       }
     </style>
-
-    <!-- jQuery (required for slideshow plugins) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Slideshow Plugin (e.g., SlidesJS or a similar lightweight slider) -->
-    <script src="path/to/your/slideshow-plugin.min.js"></script>
   </head>
   <body>
-<!-- Header Section -->
-<header>
-  <div class="container header-inner">
-    <div class="logo">
-      <a href="../../index.html" title="Igbinedion University E-Library Home">
-        <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
-      </a>
-    </div>
-    <!-- Mobile Nav Toggle Button -->
-    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
-      <span class="material-icons">menu</span>
-    </button>
-    <nav>
-      <ul>
-        <li class="active"><a href="../../index.html">Home</a></li>
-        <li>
-          <a href="#">About</a>
+    <!-- ===== Header (unchanged) ===== -->
+    <header>
+      <div class="container header-inner">
+        <div class="logo">
+          <a href="../../index.html" title="Igbinedion University E-Library Home">
+            <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo" />
+          </a>
+        </div>
+        <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+          <span class="material-icons">menu</span>
+        </button>
+        <nav>
           <ul>
+            <li class="active"><a href="../../index.html">Home</a></li>
             <li>
-              <a href="../about-us/library-staff.html"
-                >About the Library</a
-              >
+              <a href="#">About</a>
+              <ul>
+                <li><a href="../about-us.html">About the Library</a></li>
+                <li><a href="../about-us/librarian.html">Librarian</a></li>
+                <li><a href="../about-us/library-staff.html">Library Staff</a></li>
+              </ul>
             </li>
             <li>
-              <a href="../about-us/librarian.html">Librarian</a>
+              <a href="#">E-Library Resources</a>
+              <ul>
+                <li><a href="https://ourdatabase.com.ng/iuoelib/" target="_blank">Subscribed Databases</a></li>
+                <li><a href="../databases.html">Databases</a></li>
+                <li><a href="../find-information/ebooks.html">E-Books</a></li>
+                <li><a href="../find-information/e-journals.html">E-Journals</a></li>
+                <li><a href="../find-information/reference-resources.html">Reference</a></li>
+                <li><a href="../find-information/open-courseware.html">Open Courseware</a></li>
+                <li><a href="../find-information/programmes.html">Programmes and E-Books</a></li>
+              </ul>
             </li>
             <li>
-              <a href="../about-us/library-staff.html"
-                >Library Staff</a
-              >
+              <a href="#">Our Services</a>
+              <ul>
+                <li><a href="../ours-services/ask-a-librarian.html">Ask a Librarian</a></li>
+              </ul>
             </li>
+            <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+            <li><a href="#">Student Projects/Thesis</a></li>
+            <li><a href="https://acadrespub.com/" target="_blank">Journal Publication</a></li>
+            <li><a href="#" target="_blank">News</a></li>
+            <li><a href="http://opac.futminna.edu.ng:8054/" target="_blank">OPAC</a></li>
           </ul>
-        </li>
-        <li>
-          <a href="#">E-Library Resources</a>
-          <ul>
-            <li>
-              <a href="https://ourdatabase.com.ng/iuoelib/" target="_blank"
-                >Subscribed Databases</a
-              >
-            </li>
-            <li>
-              <a href="../databases.html"
-                >Databases</a
-              >
-            </li>
-            <li>
-              <a href="../find-information/ebooks.html">E-Books</a>
-            </li>
-            <li>
-              <a href="../find-information/e-journals.html"
-                >E-Journals</a
-              >
-            </li>
-            <li>
-              <a
-                href="../find-information/reference-resources.html"
-                >Reference</a
-              >
-            </li>
-            <li>
-              <a href="../find-information/open-courseware.html"
-                >Open Courseware</a
-              >
-            </li>
-                            <li>
-                  <a href="../find-information/programmes.html"
-                    >Programmes and E-Books</a
-                  >
-                </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Our Services</a>
-          <ul>
-            <li>
-              <a href="../ours-services/ask-a-librarian.html"
-                >Ask a Librarian</a
-              >
-            </li>
-          </ul>
-        </li>
+        </nav>
+      </div>
+    </header>
 
-        <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
-        <li><a href="https://acadrespub.com/" target="_blank">Journal Publication</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <!-- ===== Main ===== -->
+    <main class="main fade-in">
+      <div class="container">
+        <h1 class="title">Library Staff</h1>
+        <p class="subtitle">Meet the team that powers the Igbinedion University E-Library. Search by name or filter by role. Order reflects the official hierarchy.</p>
 
-    <section class="fade-in">
-      <h2>Library Staffs</h2>
+        <div class="toolbar">
+          <div class="search" role="search">
+            <span class="icon" aria-hidden="true">🔎</span>
+            <input id="searchInput" type="search" placeholder="Search names, roles, qualifications…" aria-label="Search staff" />
+            <button class="clear" id="clearSearch" aria-label="Clear search">✕</button>
+          </div>
+          <div class="chips" id="chips">
+            <button class="chip active" data-cat="all">All</button>
+            <button class="chip" data-cat="Leadership">Leadership</button>
+            <button class="chip" data-cat="Librarians">Librarians</button>
+            <button class="chip" data-cat="Officers">Officers</button>
+            <button class="chip" data-cat="Assistants">Assistants</button>
+            <button class="chip" data-cat="Support">Support</button>
+          </div>
+          <div class="meta"><span id="count">0</span> staff</div>
+        </div>
 
-      <table
-        style="border: 1px #aba8a8 solid; padding: 20px; border-radius: 10px"
-      >
-        <tbody>
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img
-                src="../../images/images/Prof Adulsalami pic 6.jpg"
-                alt=""
-              />
-              Prof. Abdulsalami L.T
-              <br />(BLIS, LLB, MLIS, MLC, MIAD, PhD) <br />University
-              Librarian
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img src="../../images/images/Mr Obando.jpg" alt="" />
-              <br />
-              Bonnie Obeka Obande
-              <br />(PhD in view, MLIS, BLIS, NCE. CLN) <br />Librarian I
-              (Reader Ser)
-            </td>
+        <!-- Column layout for vertical order -->
+        <div class="wall" id="grid"></div>
+        <div class="empty" id="emptyState">No matches. Try a different keyword or switch role.</div>
+      </div>
+    </main>
 
-            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img
-                width="300px"
-                src="../../images/images/Mr Vincent.jpg"
-                alt=""
-              />
-              Ekhaguosa, Vincent O
-              <br />(PhD in view, MLIS, BLIS, NCE. CLN) <br />Librarian II
-              (E-Librarian)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img src="../../images/images/Mr Efosa.jpg" alt="" />
-              Efosa Egharevba
-              <br />(PhD in view, MLIS, BLIS, CLN) <br />Librarian II
-              (Librarian)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img width="350px" src="../../images/images/Mr Musa.jpg" alt="" />
-              Bilal Musa Ado
-              <br />(BLIS, CLN) <br />Graduate Assistant (Art & Social Sci)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img src="../../images/images/Miss Grace.jpg" alt="" />
-              Unamba Grace Amarachi
-              <br />(BLIS) <br />Graduate Librarian (Medical)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img
-                width="350px"
-                src="../../images/images/Mr Adeyemi.jpg"
-                alt=""
-              />
-              Adeyemi Jone
-              <br />(DLIS) <br />Senior Lib Officer I (Binding)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td
-              style="
-                display: flex;
-                border: 1px #000000 solid;
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <img
-                width="200px"
-                src="../../images/images/Mr Lucky.jpg"
-                alt=""
-              />
-              Nwaiwu Lucky
-              <br />(DLIS) <br />Library Officer (Porter)
-            </td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Afolabi Ruth</td>
-            <td>(HND)</td>
-            <td>Higher Libr. Officer (Law)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Omotosho Isaac</td>
-            <td>(DLIS)</td>
-            <td>Prin. Lib Officer II (Cat & Class)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Ojabe Monday</td>
-            <td>(DLIS)</td>
-            <td>Senior Lib Assistant(Sen Porter Law)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Ayande Favour A.Ayeneyin</td>
-            <td>(SSCE)</td>
-            <td>Senior Lib Assistant(Sen Porter Law)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Amune Mary</td>
-            <td>(SSCE)</td>
-            <td>Senior Library Assistant</td>
-          </tr>
-
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-          <tr>
-            <td>Ojaide Florence</td>
-            <td>(SSCE)</td>
-            <td>Chief Lib Assistant (NAS/APPLIED)</td>
-          </tr>
-
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Osamudiamen Paul</td>
-            <td>(SSCE)</td>
-            <td>Lib Officer (Pharmacy Lib)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Osarodion Eboigbodin</td>
-            <td>(SSCE)</td>
-            <td>Library Assistant (Bindery)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Ogunusi Iwolola</td>
-            <td>(SSCE)</td>
-            <td>Library Assistant ( Alumina Lib)</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Nkwuka Ekwemalor Theresa</td>
-            <td>(SSCE)</td>
-            <td>Assistant Chief Typist I</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Mabel Joseph</td>
-            <td>(SSCE)</td>
-            <td>Care-taker Cleaner</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Mercy Samson</td>
-            <td>(SSCE)</td>
-            <td>Care-taker Cleaner</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Agbonghae Osasere</td>
-            <td>(SSCE)</td>
-            <td>Cleaner</td>
-          </tr>
-          <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-          <tr>
-            <td>Micheal Osahenrumwen</td>
-            <td>(SSCE)</td>
-            <td>Librarian Driver</td>
-          </tr>
-        </tbody>
-        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-      </table>
-    </section>
-
-    <!-- Footer Section -->
-
+    <!-- ===== Footer (unchanged) ===== -->
     <footer class="fade-in">
       <div class="container">
         <div class="footer-nav">
@@ -800,53 +221,152 @@
       </div>
     </footer>
 
-    <!-- Initialization Scripts -->
     <script>
-      $(document).ready(function () {
-        // Mobile Navigation Toggle
-        $(".mobile-nav-toggle").click(function () {
-          $("nav").toggleClass("active");
-        });
+      // ===== Your staff data (order preserved) =====
+      const staff = [
+        { name:"Prof. Abdulsalami L.T", quals:"(BLIS, LLB, MLIS, MLC, MIAD, PhD)", role:"University Librarian", photo:"../../images/images/Prof Adulsalami pic 6.jpg" },
+        { name:"Bonnie Obeka Obande",   quals:"(PhD in view, MLIS, BLIS, NCE. CLN)", role:"Librarian I (Reader Ser)",              photo:"../../images/images/Mr Obando.jpg" },
+        { name:"Ekhaguosa, Vincent O",  quals:"(PhD in view, MLIS, BLIS, NCE. CLN)", role:"Librarian II (E-Librarian)",            photo:"../../images/images/Mr Vincent.jpg" },
+        { name:"Efosa Egharevba",       quals:"(PhD in view, MLIS, BLIS, CLN)",      role:"Librarian II (Librarian)",              photo:"../../images/images/Mr Efosa.jpg" },
+        { name:"Bilal Musa Ado",        quals:"(BLIS, CLN)",                         role:"Graduate Assistant (Art & Social Sci)", photo:"../../images/images/Mr Musa.jpg" },
+        { name:"Unamba Grace Amarachi", quals:"(BLIS)",                               role:"Graduate Librarian (Medical)",          photo:"../../images/images/Miss Grace.jpg" },
+        { name:"Adeyemi Jone",          quals:"(DLIS)",                               role:"Senior Lib Officer I (Binding)",        photo:"../../images/images/Mr Adeyemi.jpg" },
+        { name:"Nwaiwu Lucky",          quals:"(DLIS)",                               role:"Library Officer (Porter)",              photo:"../../images/images/Mr Lucky.jpg" },
 
-        // Mobile Dropdown Toggle:
-        // When a link with a submenu is clicked on mobile, prevent its default action
-        // and toggle the dropdown menu.
-        $("nav ul li:has(ul) > a").click(function (e) {
-          if ($(window).width() < 768) {
-            e.preventDefault();
-            $(this).parent().toggleClass("open");
-            $(this).siblings("ul").slideToggle();
-          }
-        });
+        { name:"Afolabi Ruth",              quals:"(HND)",  role:"Higher Libr. Officer (Law)" },
+        { name:"Omotosho Isaac",            quals:"(DLIS)", role:"Prin. Lib Officer II (Cat & Class)" },
+        { name:"Ojabe Monday",              quals:"(DLIS)", role:"Senior Lib Assistant (Sen Porter Law)" },
+        { name:"Ayande Favour A. Ayeneyin", quals:"(SSCE)", role:"Senior Lib Assistant (Sen Porter Law)" },
+        { name:"Amune Mary",                quals:"(SSCE)", role:"Senior Library Assistant" },
+        { name:"Ojaide Florence",           quals:"(SSCE)", role:"Chief Lib Assistant (NAS/APPLIED)" },
+        { name:"Osamudiamen Paul",          quals:"(SSCE)", role:"Lib Officer (Pharmacy Lib)" },
+        { name:"Osarodion Eboigbodin",      quals:"(SSCE)", role:"Library Assistant (Bindery)" },
+        { name:"Ogunusi Iwolola",           quals:"(SSCE)", role:"Library Assistant ( Alumina Lib)" },
+        { name:"Nkwuka Ekwemalor Theresa",  quals:"(SSCE)", role:"Assistant Chief Typist I" },
+        { name:"Mabel Joseph",              quals:"(SSCE)", role:"Care-taker Cleaner" },
+        { name:"Mercy Samson",              quals:"(SSCE)", role:"Care-taker Cleaner" },
+        { name:"Agbonghae Osasere",         quals:"(SSCE)", role:"Cleaner" },
+        { name:"Micheal Osahenrumwen",      quals:"(SSCE)", role:"Librarian Driver" },
+      ];
 
-        // Basic Slideshow Functionality
-        let currentIndex = 0;
-        const slides = $(".slides .slide");
-        const slideCount = slides.length;
+      // ===== Utilities =====
+      function categorize(role="") {
+        const r = role.toLowerCase();
+        if (r.includes("university librarian")) return "Leadership";
+        if (r.includes("librarian")) return "Librarians";
+        if (r.includes("officer")) return "Officers";
+        if (r.includes("assistant")) return "Assistants";
+        return "Support";
+      }
+      function initials(name="") {
+        return name.split(/\s+/).filter(Boolean).slice(0,3).map(n=>n[0]).join("").toUpperCase();
+      }
 
-        function showSlide(index) {
-          const offset = -index * 100 + "%";
-          $(".slides").css("transform", "translateX(" + offset + ")");
+      // ===== Render (keeps original order; vertical column layout) =====
+      (function(){
+        const grid = document.getElementById("grid");
+        const chips = Array.from(document.getElementById("chips").querySelectorAll(".chip"));
+        const searchInput = document.getElementById("searchInput");
+        const clearBtn = document.getElementById("clearSearch");
+        const empty = document.getElementById("emptyState");
+        const countEl = document.getElementById("count");
+
+        const data = staff.map(s => ({...s, category: categorize(s.role)})); // NO sort – preserves hierarchy
+
+        function cardTemplate(p, idx) {
+          const tagA = `<span class="tag">${p.category}</span>`;
+          const tagB = /e-?librarian/i.test(p.role) ? `<span class="tag">E-Library</span>` : "";
+          const tagC = /medical|pharmacy|law|art/i.test(p.role) ? `<span class="tag">${(p.role.match(/(Medical|Pharmacy|Law|Art)/i)||[""])[0]}</span>` : "";
+          const safeInitials = initials(p.name);
+          const leadBadge = idx === 0 ? `<span class="tag" title="Head of Library">Leadership</span>` : "";
+          const loadingAttr = idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+
+          return `
+            <article class="card" data-cat="${p.category}">
+              <div class="person">
+                <div class="avatar" data-initials="${safeInitials}">
+                  ${p.photo
+                    ? `<img data-src="${p.photo}" alt="${p.name} photo" decoding="async" ${loadingAttr} width="72" height="72" />`
+                    : `<img alt="" width="72" height="72" />`
+                  }
+                  <span class="initials">${safeInitials}</span>
+                </div>
+                <div>
+                  <div class="name">${p.name}</div>
+                  ${p.quals ? `<div class="quals">${p.quals}</div>` : ``}
+                  <div class="role">${p.role}</div>
+                  <div class="tags">${leadBadge}${tagA}${tagB}${tagC}</div>
+                </div>
+              </div>
+            </article>
+          `;
         }
 
-        $(".next").click(function (e) {
-          e.preventDefault();
-          currentIndex = (currentIndex + 1) % slideCount;
-          showSlide(currentIndex);
+        function render(list) {
+          grid.innerHTML = list.map(cardTemplate).join("");
+
+          // Attach listeners BEFORE setting src; encode spaces in URLs
+          grid.querySelectorAll(".avatar img[data-src]").forEach(img => {
+            const raw = img.getAttribute("data-src");
+
+            const onLoad = () => {
+              if (img.naturalWidth > 0) {
+                img.classList.add("is-loaded"); // fade in
+                const initialsEl = img.parentElement.querySelector(".initials");
+                if (initialsEl) initialsEl.style.display = "none";
+              }
+            };
+            const onError = () => {
+              const initialsEl = img.parentElement.querySelector(".initials");
+              if (initialsEl) initialsEl.style.display = "block";
+            };
+
+            img.addEventListener("load", onLoad, { once: true });
+            img.addEventListener("error", onError, { once: true });
+
+            // now set src
+            try { img.src = encodeURI(raw); } catch(e) { img.src = raw; }
+
+            // handle cached images
+            if (img.complete && img.naturalWidth) onLoad();
+          });
+
+          countEl.textContent = String(list.length);
+        }
+
+        function activeCategory(){
+          const chip = chips.find(c => c.classList.contains("active"));
+          return chip ? chip.dataset.cat : "all";
+        }
+
+        function filter() {
+          const q = searchInput.value.trim().toLowerCase();
+          const cat = activeCategory();
+          const filtered = data.filter(p => {
+            const catOk = (cat === "all") || (p.category === cat);
+            if (!catOk) return false;
+            if (!q) return true;
+            const hay = [p.name, p.role, p.quals || ""].join(" ").toLowerCase();
+            return hay.includes(q);
+          });
+          render(filtered);
+          empty.classList.toggle("show", filtered.length === 0);
+        }
+
+        // events
+        searchInput.addEventListener("input", filter);
+        clearBtn.addEventListener("click", () => { searchInput.value = ""; filter(); searchInput.focus(); });
+        chips.forEach(chip=>{
+          chip.addEventListener("click", ()=>{
+            chips.forEach(c=>c.classList.remove("active"));
+            chip.classList.add("active");
+            filter();
+          });
         });
 
-        $(".prev").click(function (e) {
-          e.preventDefault();
-          currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-          showSlide(currentIndex);
-        });
-
-        // Auto-play the slideshow every 4 seconds
-        setInterval(function () {
-          currentIndex = (currentIndex + 1) % slideCount;
-          showSlide(currentIndex);
-        }, 4000);
-      });
+        // initial
+        render(data);
+      })();
     </script>
   </body>
 </html>

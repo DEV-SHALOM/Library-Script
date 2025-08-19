@@ -4,350 +4,134 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open Courseware - Polytechnic Library</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="Website Icon"
-      href="../../images/IUO_logo-removebg-preview.png"
-    />
+
+    <!-- Bootstrap (kept) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link rel="Website Icon" href="../../images/IUO_logo-removebg-preview.png" />
+    <!-- Material Icons (for buttons + mobile menu) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      /* ===== Base (unchanged vibe) ===== */
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:"Poppins",sans-serif;line-height:1.6;color:#444}
+      a{text-decoration:none;color:inherit;transition:color .3s ease}
+      a:hover{color:#002349}
+      img{max-width:100%;display:block}
+      ul{list-style:none}
+      .container{width:90%;max-width:1280px;margin:0 auto}
+
+      /* ===== Header (UNTOUCHED) ===== */
+      header{background:#fff;backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.05);position:sticky;height:75px;display:flex;top:0;z-index:1000;transition:all .3s ease}
+      .header-inner{padding:1rem 0;display:flex;justify-content:space-between;align-items:center}
+      .logo img{max-height:40px}
+      nav{position:relative}
+      nav ul{display:flex}
+      nav ul li{position:relative}
+      nav ul li a{padding:10px 15px;font-size:.9rem;border-radius:4px;transition:.3s all;position:relative}
+      nav ul li a::before{content:"";position:absolute;bottom:1.5px;left:50%;width:0;height:.2rem;background:#e8e8e8;border-radius:25px;transition:300ms all}
+      nav ul li a:hover::before{left:0;width:100%}
+      nav ul li a:hover,nav ul li.active>a{color:#333}
+      nav ul li ul{display:flex;flex-direction:column;position:absolute;top:100%;left:0;background:#fff;padding:10px 0;border-radius:4px;box-shadow:0 0 100px rgba(0,0,0,.2);min-width:180px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease;z-index:1000}
+      nav ul li:hover>ul{opacity:1;visibility:visible;transform:translateY(0)}
+      nav ul li ul li a{padding:8px 15px;display:block;color:#000;transition:.3s all}
+      nav ul li ul li a:hover{background:#063f8529}
+      .mobile-nav-toggle{display:none;background:none;border:none;font-size:2rem;cursor:pointer}
+
+      /* ===== Footer (unchanged) ===== */
+      footer{background:linear-gradient(145deg,#466d9b,#2c3e50);color:#fff;padding:2rem 0;margin-top:4rem}
+      footer .footer-nav ul{display:flex;justify-content:center;gap:2rem;font-size:.75rem;margin-bottom:2rem}
+      footer .footer-nav ul li a{color:#fff;opacity:.8;transition:all .3s ease}
+      footer .footer-nav ul li a:hover{opacity:1;transform:translateY(-2px)}
+      footer>.container>p{font-size:.8rem}
+
+      /* ===== MAIN redesign only ===== */
+      :root{
+        --primary:#466d9b;
+        --muted:#64748b;
+        --ring:#dbeafe;
+        --card:#ffffff;
+        --card-border:#e5e7eb;
+      }
+      .main{padding:2rem 0 3rem}
+      .page-title{
+        color:var(--primary);font-size:1.9rem;margin:1.7rem 0 .5rem;text-align:center;position:relative;
+        padding-bottom:.75rem;font-weight:700;letter-spacing:-.2px
+      }
+      .page-title::after{
+        content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+        width:220px;max-width:60vw;height:3px;background:linear-gradient(90deg,#466d9b,transparent);border-radius:2px
+      }
+      .subtitle{color:var(--muted);text-align:center;margin:.25rem auto 1.25rem;max-width:70ch}
+
+      .toolbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:0 0 1rem}
+      .search{position:relative;flex:1;min-width:260px}
+      .search input{
+        width:100%;padding:12px 44px;border:1px solid var(--card-border);border-radius:14px;background:#fff;
+        outline:none;color:#0f172a;transition:border-color .2s, box-shadow .2s
+      }
+      .search input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+      .search .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+      .search .clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:transparent;cursor:pointer;color:#9ca3af}
+
+      .chips{display:flex;gap:.5rem;flex-wrap:wrap}
+      .chip{padding:8px 12px;border:1px solid var(--card-border);border-radius:999px;background:#fff;color:#111;font-size:.84rem;cursor:pointer;user-select:none;transition:all .2s}
+      .chip:hover{transform:translateY(-1px)}
+      .chip.active{border-color:#93c5fd;background:#eff6ff}
+
+      .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+      .ocw-card{
+        background:var(--card);border:1px solid var(--card-border);border-radius:16px;overflow:hidden;
+        box-shadow:0 2px 10px rgba(2,6,23,.04);transition:transform .2s ease, box-shadow .2s ease;display:flex;flex-direction:column
+      }
+      .ocw-card:hover{transform:translateY(-2px)}
+      .ocw-top{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid #eef2f7;background:#fff}
+      .ocw-logo{width:60px;height:60px;border:1px solid #e5e7eb;border-radius:12px;display:grid;place-items:center;background:#fff;overflow:hidden}
+      .ocw-logo img{width:100%;height:100%;object-fit:contain}
+      .ocw-name{font-weight:700;color:#0f172a}
+      .ocw-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+      .badge{font-size:.72rem;padding:4px 8px;border-radius:999px;border:1px solid #e5e7eb;background:#f8fafc;color:#334155}
+
+      .ocw-body{padding:14px 16px}
+      .ocw-desc{color:#334155;font-size:.95rem;line-height:1.65;margin:0 0 .75rem}
+      .ocw-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+      .btn-visit{
+        display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;border:1px solid var(--card-border);
+        background:#fff;color:#0f172a;font-weight:600;transition:box-shadow .2s, transform .2s
+      }
+      .btn-visit:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(2,6,23,.08)}
+      .btn-visit .material-icons{font-size:18px}
+
+      .empty{display:none;text-align:center;padding:2rem;background:#fff;border:1px dashed #cbd5e1;border-radius:16px;color:#475569}
+      .empty.show{display:block}
+
+      /* Mobile nav behavior (kept) */
+      @media (max-width:768px){
+        .header-inner{flex-direction:column;gap:10px}
+        nav{display:none;width:100%}
+        nav.active{background:rgba(255,255,255,.98);backdrop-filter:blur(10px);padding:1rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+        nav ul{flex-direction:column;gap:10px}
+        .mobile-nav-toggle{display:block;position:absolute;top:20px;right:20px;color:#002349}
+        nav ul li ul{display:none;position:static;background:none;box-shadow:none;padding:0;margin-left:20px;opacity:1;transform:none}
+        nav ul li.open>ul{display:block}
+        nav ul li:hover>ul{display:none !important}
+        footer .footer-nav ul{flex-direction:column;gap:10px}
       }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        line-height: 1.6;
-        color: #444;
-        /* background: linear-gradient(to top, #334c6694,#334c6690); */
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-        transition: color 0.3s ease;
-      }
-      a:hover {
-        color: #fff;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      ul {
-        list-style: none;
-      }
-      /* Container */
-      .container {
-        width: 90%;
-        max-width: 1280px;
-        margin: 0 auto;
-      }
-
-      /* Header */
-      header {
-        background: rgb(255, 255, 255);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-        position: sticky;
-        height: 75px;
-        display: flex;
-        top: 0;
-        z-index: 1000;
-        transition: all 0.3s ease;
-      }
-
-      .header-inner {
-        padding: 1rem 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .page-title {
-        color: #466d9b;
-        font-size: 1.9rem;
-        margin-bottom: 1rem;
-        margin-top: 1.7rem;
-        text-align: center;
-        position: relative;
-        padding-bottom: 0.75rem;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-      }
-
-      .page-title::after {
-        content: "";
-        position: absolute;
-        text-align: center;
-        bottom: 9px;
-        left: 43%;
-        width: 15%;
-        height: 3px;
-        background: linear-gradient(90deg, #466d9b, transparent);
-        border-radius: 2px;
-      }
-      .logo img {
-        max-height: 60px;
-      }
-      /* Navigation */
-      nav {
-        position: relative;
-      }
-      nav ul {
-        display: flex;
-        gap: 20px;
-      }
-      nav ul li {
-        position: relative;
-      }
-      nav ul li a {
-        padding: 10px 15px;
-        /* font-weight: 600; */
-        font-size: 0.9rem;
-        border-radius: 4px;
-        transition: 0.3s all;
-      }
-
-      nav ul li a::before {
-        content: "";
-        position: absolute;
-        /* top: 0; */
-        bottom: 1.5px;
-        left: 50%;
-        width: 0%;
-        height: 0.2rem;
-        background: #e8e8e8;
-        border-radius: 25px;
-        transition: 300ms all;
-      }
-
-      nav ul li a:hover::before {
-        content: "";
-        left: 0%;
-        width: 100%;
-      }
-      nav ul li a:hover,
-      nav ul li.active > a {
-        /* background: #0274ffe6;/ */
-        color: #333;
-      }
-      /* Dropdown Menu with Smooth Transition (Desktop) */
-      nav ul li ul {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        padding: 10px 0;
-        border-radius: 4px;
-        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
-        min-width: 180px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 1000;
-      }
-      nav ul li:hover > ul {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-      nav ul li ul li a {
-        padding: 8px 15px;
-        display: block;
-        color: #000;
-        transition: 0.3s all;
-      }
-      nav ul li ul li a:hover {
-        background: #063f8529;
-        /* color: #fff; */
-      }
-
-      .mobile-nav-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 2rem;
-        cursor: pointer;
-      }
-
-      .fade-in {
-        animation: fadeIn 0.5s ease-in;
-      }
-
-      .card-img-top {
-        height: 200px;
-        object-fit: contain;
-        padding: 20px;
-        background-color: #fff;
-      }
-
-      .resource-card {
-        transition: transform 0.2s;
-        border-radius: 15px;
-        overflow: hidden;
-      }
-
-      .resource-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .card-img-top {
-        height: 200px;
-        object-fit: contain;
-        padding: 20px;
-        background-color: #fff;
-      }
-
-      .footer {
-        background-color: var(--primary-color);
-        color: white;
-        padding: 2rem;
-        margin-top: 3rem;
-        text-align: center;
-      }
-
-      @media (max-width: 768px) {
-        .header-inner {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Hide desktop nav; show toggle button */
-        nav {
-          display: none;
-          width: 100%;
-        }
-        nav.active {
-          background: rgba(255, 255, 255, 0.98);
-          backdrop-filter: blur(10px);
-          padding: 1rem;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-        /* Display the mobile nav toggle */
-        .mobile-nav-toggle {
-          display: block;
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          color: #002349;
-        }
-        /* Override dropdown styles for mobile */
-        nav ul li ul {
-          display: none; /* Hidden by default */
-          position: static; /* Remove absolute positioning */
-          background: none;
-          box-shadow: none;
-          padding: 0;
-          margin-left: 20px; /* Indent submenu items */
-          opacity: 1; /* Ensure it’s visible when toggled */
-          transform: none;
-        }
-        nav ul li.open > ul {
-          display: block;
-        }
-        /* Override hover behavior on mobile so that hover does not trigger dropdowns */
-        nav ul li:hover > ul {
-          display: none !important;
-        }
-        footer .footer-nav ul {
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        nav ul li a::before {
-          content: "";
-          position: absolute;
-          /* top: 0; */
-          bottom: 1.5px;
-          left: 50%;
-          width: 0%;
-          height: 0.2rem;
-          background: #aaaaaa00;
-          border-radius: 25px;
-          transition: 300ms all;
-        }
-
-        footer > .container .footer-nav > ul {
-          display: none;
-          /* display: flex; */
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-        }
-      }
-
-      /* Footer */
-      footer {
-        background: linear-gradient(145deg, #466d9b, #2c3e50);
-        color: #fff;
-        padding: 2rem 0;
-        margin-top: 4rem;
-      }
-
-      footer .footer-nav ul {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        font-size: 0.75rem;
-        margin-bottom: 2rem;
-      }
-
-      footer .footer-nav ul li a {
-        color: #fff;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      footer .footer-nav ul li a:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-      }
-
-      footer > .container > p {
-        font-size: 0.8rem;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+      .fade-in{animation:fadeIn .5s ease-in}
+      @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     </style>
   </head>
   <body>
-    <!-- Navigation -->
-    <!-- Header Section -->
+    <!-- ===== Header (unchanged) ===== -->
     <header>
       <div class="container header-inner">
         <div class="logo">
-          <a
-            href="../../index.html"
-            title="Igbinedion University E-Library Home"
-          >
-            <img
-              src="../../images/IUO_logo.png"
-              alt="Igbinedion University Logo"
-            />
+          <a href="../../index.html" title="Igbinedion University E-Library Home">
+            <img src="../../images/IUO_logo.png" alt="Igbinedion University Logo"/>
           </a>
         </div>
-        <!-- Mobile Nav Toggle Button -->
         <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
           <span class="material-icons">menu</span>
         </button>
@@ -357,185 +141,65 @@
             <li>
               <a href="#">About</a>
               <ul>
-                <li>
-                  <a href="../about-us/library-staff.html">About the Library</a>
-                </li>
-                <li>
-                  <a href="../about-us/librarian.html">Librarian</a>
-                </li>
-                <li>
-                  <a href="../about-us/library-staff.html">Library Staff</a>
-                </li>
+                <li><a href="../about-us.html">About the Library</a></li>
+                <li><a href="../about-us/librarian.html">Librarian</a></li>
+                <li><a href="../about-us/library-staff.html">Library Staff</a></li>
               </ul>
             </li>
             <li>
               <a href="#">E-Library Resources</a>
               <ul>
-                <li>
-                  <a href="https://ourdatabase.com.ng/iuoelib/" target="_blank"
-                    >Subscribed Databases</a
-                  >
-                </li>
-                <li>
-                  <a href="../databases.html">Databases</a>
-                </li>
-                <li>
-                  <a href="../find-information/ebooks.html">E-Books</a>
-                </li>
-                <li>
-                  <a href="../find-information/e-journals.html">E-Journals</a>
-                </li>
-                <li>
-                  <a href="../find-information/reference-resources.html"
-                    >Reference</a
-                  >
-                </li>
-                <li>
-                  <a href="../find-information/open-courseware.html"
-                    >Open Courseware</a
-                  >
-                </li>
-                <li>
-                  <a href="../find-information/programmes.html"
-                    >Programmes and E-Books</a
-                  >
-                </li>
+                <li><a href="https://ourdatabase.com.ng/iuoelib/" target="_blank">Subscribed Databases</a></li>
+                <li><a href="../databases.html">Databases</a></li>
+                <li><a href="../find-information/ebooks.html">E-Books</a></li>
+                <li><a href="../find-information/e-journals.html">E-Journals</a></li>
+                <li><a href="../find-information/reference-resources.html">Reference</a></li>
+                <li><a href="../find-information/open-courseware.html">Open Courseware</a></li>
+                <li><a href="../find-information/programmes.html">Programmes and E-Books</a></li>
               </ul>
             </li>
             <li>
               <a href="#">Our Services</a>
               <ul>
-                <li>
-                  <a href="../ours-services/ask-a-librarian.html"
-                    >Ask a Librarian</a
-                  >
-                </li>
+                <li><a href="../ours-services/ask-a-librarian.html">Ask a Librarian</a></li>
               </ul>
             </li>
-            
-            <li>
-              <a
-                href="../ours-services/ask-a-librarian.html#contact-info-section"
-                >Contact Us</a
-              >
-            </li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="../ours-services/ask-a-librarian.html#contact-info-section">Contact Us</a></li>
+            <li><a href="#">Student Projects/Thesis</a></li>
+            <li><a href="https://acadrespub.com/" target="_blank">Journal Publication</a></li>
+            <li><a href="#" target="_blank">News</a></li>
+            <li><a href="http://opac.futminna.edu.ng:8054/" target="_blank">OPAC</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container my-5">
-      <h1 class="text-center mb-5 display-4 page-title">Open Courseware</h1>
+    <!-- ===== Main (redesigned) ===== -->
+    <main class="main container fade-in">
+      <h1 class="page-title">Open Courseware</h1>
+      <p class="subtitle">Browse free, high-quality course materials from leading institutions. Search or filter by focus area.</p>
 
-      <div class="row g-4">
-        <!-- MIT Open Courseware -->
-        <div class="col-md-6">
-          <div class="card resource-card h-100">
-            <img
-              style="background-color: #000"
-              src="https://ocw.mit.edu/static_shared/images/ocw_logo_white.cabdc9a745b03db3dad4.svg"
-              class="card-img-top"
-              alt="MIT Open Courseware"
-            />
-            <div class="card-body">
-              <h5 class="card-title">MIT Open Courseware</h5>
-              <p class="card-text">
-                Massachusetts Institute of Technology educational materials from
-                its undergraduate- and graduate-level courses available online,
-                freely and openly to anyone.
-              </p>
-              <a
-                href="https://ocw.mit.edu/courses/find-by-topic/"
-                target="_blank"
-                class="btn btn-primary"
-                >Access Courses</a
-              >
-            </div>
-          </div>
+      <div class="toolbar">
+        <div class="search" role="search">
+          <span class="icon" aria-hidden="true">🔎</span>
+          <input id="searchInput" type="search" placeholder="Search providers, topics, descriptions…" aria-label="Search open courseware"/>
+          <button class="clear" id="clearSearch" aria-label="Clear search">✕</button>
         </div>
-
-        <!-- African Virtual University -->
-        <div class="col-md-6">
-          <div class="card resource-card h-100">
-            <img
-              src="https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/rha7p7k6dkku6k7cgiby"
-              class="card-img-top"
-              alt="African Virtual University"
-            />
-            <div class="card-body">
-              <h5 class="card-title">African Virtual University (AVU)</h5>
-              <p class="card-text">
-                1,335 Open Educational Resources (OERs) under Creative Commons
-                license.
-              </p>
-              <a
-                href="https://oer.avu.org/handle/123456789/86"
-                target="_blank"
-                class="btn btn-primary"
-                >Explore Resources</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- JHSPH OpenCourseWare -->
-        <div class="col-md-6">
-          <div class="card resource-card h-100">
-            <img
-              src="https://www.mooclab.club/attachments/jhsph-logo-2-jpg.362/?temp_hash=8282e4a1d2af16d06f8af2df62325850"
-              class="card-img-top"
-              alt="JHSPH OpenCourseWare"
-            />
-            <div class="card-body">
-              <h5 class="card-title">JHSPH OpenCourseWare</h5>
-              <p class="card-text">
-                Johns Hopkins Bloomberg School of Public Health course content
-                available since 2004.
-              </p>
-              <a
-                href="https://ocw.jhsph.edu/index.cfm"
-                target="_blank"
-                class="btn btn-primary"
-                >View Courses</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- University of Michigan -->
-        <div class="col-md-6">
-          <div class="card resource-card h-100">
-            <img
-              style="background-color: #002e5f"
-              src="https://open.umich.edu/sites/default/files/umlibrarylogo.jpg"
-              class="card-img-top"
-              alt="University of Michigan"
-            />
-            <div class="card-body">
-              <h5 class="card-title">University of Michigan OER</h5>
-              <p class="card-text">
-                Open educational resources including course materials, videos,
-                lectures, and student work under Creative Commons license.
-              </p>
-              <a
-                href="https://open.umich.edu/find/find-open-educational-resources"
-                target="_blank"
-                class="btn btn-primary"
-                >Discover Materials</a
-              >
-            </div>
-          </div>
+        <div class="chips" id="chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="Universities">Universities</button>
+          <button class="chip" data-filter="STEM">STEM</button>
+          <button class="chip" data-filter="Health">Health</button>
+          <button class="chip" data-filter="Africa">Africa</button>
+          <button class="chip" data-filter="OER">OER</button>
         </div>
       </div>
+
+      <section class="grid" id="grid"></section>
+      <div class="empty" id="emptyState">No resources match your filters. Try clearing search or switching tags.</div>
     </main>
 
-    <!-- Footer -->
+    <!-- ===== Footer (unchanged) ===== -->
     <footer class="fade-in">
       <div class="container">
         <div class="footer-nav">
@@ -545,11 +209,7 @@
             <li><a href="#">E-Library Resources</a></li>
             <li><a href="services.html">Our Services</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-            <li>
-              <a href="https://acadrespub.com/" target="_blank"
-                >Journal Publication</a
-              >
-            </li>
+            <li><a href="https://acadrespub.com/" target="_blank">Journal Publication</a></li>
           </ul>
         </div>
         <p>&copy; 2025 Igbinedion University E-Library. All rights reserved.</p>
@@ -557,5 +217,114 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // ===== Data =====
+      const OCW = [
+        {
+          name: "MIT OpenCourseWare",
+          url: "https://ocw.mit.edu/courses/find-by-topic/",
+          logo: "https://ocw.mit.edu/static_shared/images/ocw_logo_white.cabdc9a745b03db3dad4.svg",
+          logoStyle: "background:#000;padding:6px",
+          tags: ["Universities","STEM","OER","US"],
+          desc: "MIT undergraduate and graduate materials—freely and openly available to anyone."
+        },
+        {
+          name: "African Virtual University (AVU) OER",
+          url: "https://oer.avu.org/handle/123456789/86",
+          logo: "https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/rha7p7k6dkku6k7cgiby",
+          tags: ["Africa","Universities","OER"],
+          desc: "1,300+ open educational resources licensed under Creative Commons."
+        },
+        {
+          name: "JHSPH OpenCourseWare",
+          url: "https://ocw.jhsph.edu/index.cfm",
+          logo: "https://www.mooclab.club/attachments/jhsph-logo-2-jpg.362/?temp_hash=8282e4a1d2af16d06f8af2df62325850",
+          tags: ["Health","Universities","OER","US"],
+          desc: "Johns Hopkins Bloomberg School of Public Health course content since 2004."
+        },
+        {
+          name: "University of Michigan Open",
+          url: "https://open.umich.edu/find/find-open-educational-resources",
+          logo: "https://open.umich.edu/sites/default/files/umlibrarylogo.jpg",
+          logoStyle: "background:#002e5f",
+          tags: ["Universities","OER","US"],
+          desc: "Open courses, videos, lectures, and materials under Creative Commons licenses."
+        }
+      ];
+
+      // ===== Render =====
+      const grid = document.getElementById("grid");
+      const chips = Array.from(document.getElementById("chips").querySelectorAll(".chip"));
+      const searchInput = document.getElementById("searchInput");
+      const clearBtn = document.getElementById("clearSearch");
+      const empty = document.getElementById("emptyState");
+
+      function render(list){
+        grid.innerHTML = list.map(item=>{
+          const safeLogo = item.logo ? encodeURI(item.logo) : null;
+          const tags = (item.tags||[]).map(t=>`<span class="badge">${t}</span>`).join("");
+          return `
+            <article class="ocw-card">
+              <div class="ocw-top">
+                <div class="ocw-logo">
+                  ${safeLogo ? `<img src="${safeLogo}" alt="${item.name} logo" style="${item.logoStyle||""}" loading="lazy" decoding="async">` : ""}
+                </div>
+                <div>
+                  <div class="ocw-name">${item.name}</div>
+                  <div class="ocw-tags">${tags}</div>
+                </div>
+              </div>
+              <div class="ocw-body">
+                <p class="ocw-desc">${item.desc}</p>
+                <div class="ocw-actions">
+                  <a class="btn-visit" href="${item.url}" target="_blank" rel="noopener">
+                    <span class="material-icons" aria-hidden="true">open_in_new</span> Access
+                  </a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+        empty.classList.toggle("show", list.length===0);
+      }
+
+      function activeFilter(){
+        const chip = chips.find(c=>c.classList.contains("active"));
+        return chip ? chip.dataset.filter : "all";
+      }
+
+      function filter(){
+        const q = searchInput.value.trim().toLowerCase();
+        const f = activeFilter();
+        const out = OCW.filter(d=>{
+          const hay = [d.name, d.desc, (d.tags||[]).join(" ")].join(" ").toLowerCase();
+          const okQ = !q || hay.includes(q);
+          const okF = f==="all" || (d.tags||[]).some(t=>t.toLowerCase()===f.toLowerCase());
+          return okQ && okF;
+        });
+        render(out);
+      }
+
+      searchInput.addEventListener("input", filter);
+      clearBtn.addEventListener("click", ()=>{ searchInput.value=""; filter(); searchInput.focus(); });
+      chips.forEach(c=>c.addEventListener("click", ()=>{
+        chips.forEach(x=>x.classList.remove("active"));
+        c.classList.add("active");
+        filter();
+      }));
+      render(OCW);
+
+      // ===== Mobile nav helpers (match other pages) =====
+      document.querySelector('.mobile-nav-toggle')?.addEventListener('click',()=>{
+        document.querySelector('nav')?.classList.toggle('active');
+      });
+      document.querySelectorAll('nav ul li > a').forEach(a=>{
+        a.addEventListener('click',e=>{
+          const li=a.parentElement, sub=li?.querySelector('ul');
+          if (window.innerWidth<768 && sub){ e.preventDefault(); li.classList.toggle('open'); }
+        });
+      });
+    </script>
   </body>
 </html>
